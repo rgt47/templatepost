@@ -1,0 +1,831 @@
+---
+title: "Constructing a reproducible blog post using zzcollab tools"
+subtitle: "A template for reproducible analysis"
+author: "Ronald G. Thomas"
+date: "2025-01-01"
+categories: [R Programming, Data Science, Statistical Computing]
+description: "I didn't really know much about [topic] until I tried to [implement/understand] it myself. Here's what I learned along the way."
+image: "media/images/penguin-hero.jpg"
+document-type: "blog"
+draft: false
+execute:
+  echo: true
+  warning: false
+  message: false
+format:
+  html:
+    code-fold: false
+    code-tools: false
+
+---
+
+<!-- ============================================================================
+EXEMPLAR BLOG POST TEMPLATE
+============================================================================
+
+This is a template demonstrating ZZCOLLAB best practices for reproducible blog
+posts. It shows:
+
+✓ Separation of concerns (analysis code in scripts/, narrative in this file)
+✓ Pre-generated figures and data (loaded from analysis/*)
+✓ Professional visual rhythm (hero + ambiance images)
+✓ Result tables extracted from analysis
+✓ Clear author guidance with TEMPLATE INSTRUCTION comments
+
+TO USE THIS TEMPLATE FOR YOUR OWN POST:
+1. Copy the template_post directory
+2. Follow TEMPLATE INSTRUCTION comments throughout
+3. Update YAML front matter (title, author, date, categories, image)
+4. Replace [placeholders] with your content
+5. Ensure analysis scripts run: 01_prepare_data.R → 02_fit_models.R → 03_generate_figures.R
+6. Load results from data files (don't re-compute in this file)
+
+STRUCTURE OVERVIEW:
+- Introduction: Hook with personal learning narrative (2-3 paragraphs)
+- Motivations & Objectives: Why this topic? What did you want to learn?
+- Conceptual Explanation: What is [Topic]? (plain language)
+- Analysis Sections: Present findings with figures and tables
+- Lessons Learned: Key takeaways
+- Limitations & Future Work: Honest assessment
+- References & Reproducibility: Citations and how to reproduce
+
+VISUAL RHYTHM (2-3 "ambiance" images for engagement):
+- HERO IMAGE: ~width:80% after intro (below "Motivations")
+- AMBIANCE IMAGE 1: ~width:100%, 500px height, after first section
+- AMBIANCE IMAGE 2: ~width:100%, 500px height, after mid-point
+- Analysis figures: Full width, 600-800px height
+
+See comments below for exact placement and sizing.
+
+============================================================================ -->
+
+<!-- ============================================================================
+HERO IMAGE SECTION
+============================================================================ -->
+
+<!-- TEMPLATE INSTRUCTION: HERO IMAGE
+
+The hero image is your first visual impression - it sets the tone for the entire
+post and appears in blog listings. It should be:
+- Engaging and relevant to your topic
+- High quality (300 DPI or higher)
+- Professional and accessible
+- Properly attributed if from external source
+
+Current: penguin-hero.jpg (penguin theme - replace with your topic!)
+
+Options for sourcing:
+- UNSPLASH: Free high-quality images → put in media/images/, add attribution to media/images/README.md
+- LOCAL SCREENSHOTS: Your own analysis environments → include media/images/README.md with creation date
+- GENERATED: R-produced visualizations → save to analysis/figures/ and reference there
+
+PLACEMENT: This will be displayed in the blog listing, so make it count!
+
+ATTRIBUTION: Document the source in analysis/media/images/README.md
+-->
+
+![Engaging hero image that introduces your topic visually](media/images/penguin-hero.jpg){.img-fluid width=80%}
+
+*Photo caption with attribution if needed. This image sets the visual tone for your entire post.*
+
+<!-- ============================================================================
+INTRODUCTION SECTION
+============================================================================ -->
+
+# Introduction
+
+<!-- TEMPLATE INSTRUCTION: INTRODUCTION - Ken Koon Wong Style
+
+Purpose: Hook with personal learning narrative
+Ken's approach:
+- "I didn't really know... until I learned"
+- Establishes author as learner, not expert
+- Creates immediate relatability
+- Conversational, humble tone
+
+Keep it SHORT - 2-3 paragraphs max. Save detailed explanations for later.
+
+EXAMPLE STRUCTURE:
+Paragraph 1: Your "I didn't know until..." hook
+Paragraph 2: Brief context (the problem you faced)
+Paragraph 3: Transition to what you wanted to accomplish
+-->
+
+I didn't really know much about [topic] until I [encountered situation/tried to implement it/needed it for project]. Like many data scientists, I thought [initial misconception or assumption]. Turns out, [what you actually discovered].
+
+[Brief context: Why did you need this? What problem were you trying to solve? Keep it personal and specific.]
+
+Here's what I set out to understand:
+
+## Motivations
+
+<!-- TEMPLATE INSTRUCTION: MOTIVATIONS SECTION
+
+Ken Koon Wong always includes a "Motivations" section that explains WHY the topic
+matters. This is crucial - it helps readers understand if YOUR problem is THEIR problem.
+
+Make it personal and specific:
+- Don't just say "optimization is important"
+- Say "I was frustrated that my analysis took 3 hours to run on a 2M row dataset"
+
+EXAMPLE:
+**Why explore [topic]?**
+- [Personal reason 1]: I had a specific problem (e.g., "My plots looked ugly")
+- [Practical need 2]: Gap in my workflow (e.g., "I had no systematic way to X")
+- [Learning goal 3]: Skill I wanted to develop (e.g., "I'd only used Y, never Z")
+- [Curiosity 4]: Interesting question (e.g., "I wondered if X was faster than Y")
+-->
+
+**Why explore [topic]?**
+- [Personal reason 1: specific problem you faced]
+- [Practical need 2: gap in your workflow]
+- [Learning goal 3: skill you wanted to develop]
+- [Curiosity 4: interesting question you had]
+
+## Objectives
+
+<!-- TEMPLATE INSTRUCTION: OBJECTIVES SECTION
+
+Clear, numbered goals. Ken's style.
+
+Make them SPECIFIC and MEASURABLE where possible:
+- BAD: "Learn about modeling"
+- GOOD: "Fit a linear regression, compare R², and identify which variables predict MPG"
+
+This section should match what you actually accomplished in the post.
+The reader uses this as a mental roadmap of what they'll learn.
+-->
+
+**What I wanted to accomplish:**
+1. [Specific, measurable objective 1]
+2. [Specific, measurable objective 2]
+3. [Specific, measurable objective 3]
+4. [Stretch goal or advanced concept]
+
+**Disclaimer:** I'm documenting my learning process here. If you spot errors or have better approaches, please let me know.
+
+<!-- ============================================================================
+AMBIANCE IMAGE 1 (OPTIONAL BUT RECOMMENDED)
+============================================================================
+
+Large format image for visual rhythm. Place after introductory section.
+
+SIZING: width: 100%, height: auto (or ~500px for consistent spacing)
+PURPOSE: Break up dense introductory text, maintain reader engagement
+CONTENT: Should relate to topic but can be more atmospheric/creative
+
+EXAMPLES:
+- Overhead desk setup photo
+- Code editor screenshot
+- Data visualization in action
+- Office/workspace ambiance
+- Topic-related artwork
+============================================================================ -->
+
+![Atmospheric image to maintain visual engagement - replace with relevant scene](media/images/penguin-hero.jpg){.img-fluid}
+
+<!-- ============================================================================
+PREREQUISITES AND SETUP SECTION
+============================================================================ -->
+
+# Prerequisites and Setup
+
+<!-- TEMPLATE INSTRUCTION: PREREQUISITES - Ken's Style
+
+Keep it minimal and conversational. Show the code first, explain briefly.
+Don't overwhelm with requirements.
+
+For ZZCOLLAB blog posts, data should be ALREADY PREPARED by scripts.
+So this section should just show how to LOAD the prepared data and utilities.
+
+DO NOT include inline data cleaning here - that's in 01_prepare_data.R
+
+EXAMPLE:
+- Load libraries (from renv automatically installed)
+- Load prepared data from CSV: read_csv("data/derived_data/...")
+- Load utility functions: source("R/plotting_utils.R")
+- Display basic structure to confirm loaded correctly
+-->
+
+Here's what you'll need to follow along:
+
+```{r}
+#| eval: false
+# Install packages if needed (renv should have handled this)
+# But just in case:
+install.packages(c("tidyverse", "broom", "knitr", "patchwork"))
+```
+
+```{r}
+#| label: setup-libraries
+#| eval: false
+# Load libraries
+library(tidyverse)
+library(broom)
+library(knitr)
+library(patchwork)
+source("R/plotting_utils.R")  # Load custom utility functions
+
+# Setup theme and colors
+setup_plot_theme()
+colors <- get_analysis_colors()
+
+# Load PREPARED data (generated by 01_prepare_data.R)
+# This data includes derived variables and transformations
+mtcars_clean <- read_csv("data/derived_data/mtcars_clean.csv", show_col_types = FALSE)
+```
+
+**Background:** Basic R and ggplot2 familiarity helpful but not required. I'll explain concepts as we go!
+
+![Foundational concepts and theoretical frameworks](media/images/penguin-hero.jpg){.img-fluid width=100% style="margin: 2rem 0;"}
+
+# What is [Topic/Concept]?
+
+<!-- TEMPLATE INSTRUCTION: CONCEPTUAL FOUNDATION
+
+Ken often includes a "What is X?" section explaining concepts in plain language.
+
+STRUCTURE:
+1. Start with simple definition (1 sentence)
+2. Use analogy or comparison (helps understanding)
+3. Give concrete example (makes it real)
+4. Keep it brief (2-4 sentences total)
+5. THEN show the code
+
+Purpose: Readers without domain expertise should understand the concept.
+
+EXAMPLE FOR "LINEAR REGRESSION":
+"Linear regression is a method for understanding how one variable depends on
+another - kind of like fitting a straight line through a scatter plot of points.
+Imagine you're trying to predict someone's height based on their parents'
+heights: you'd draw a line through data points, then use that line to make
+predictions for new people. That's what linear regression does."
+-->
+
+Before diving into code, let's clarify what [topic] actually means. [Simple, plain-language explanation of the concept. Use an analogy if helpful.] In practice, this means [concrete example or application].
+
+# Getting Started: Initial Exploration
+
+<!-- TEMPLATE INSTRUCTION: FIRST ANALYSIS SECTION
+
+This is where the real analysis begins!
+
+STRUCTURE:
+- CODE FIRST (show it)
+- OUTPUT (display results)
+- BRIEF INTERPRETATION (2-4 sentences)
+
+Ken's ratio: ~40% code, 60% explanation. Don't explain every line of code.
+Assume reader can understand basic R - focus on the "why" and "what does this mean"
+
+INCLUDE SUMMARY TABLE: Show key statistics from prepared data
+-->
+
+```{r}
+#| label: data-overview
+#| eval: false
+# Display structure of prepared data
+glimpse(mtcars_clean)
+```
+
+Okay, so we have 32 cars with 11 variables. Let's examine the data characteristics.
+
+```{r}
+#| label: summary-stats
+#| eval: false
+# Key summary stats
+summary_table <- mtcars_clean %>%
+  summarise(
+    n = n(),
+    mpg_mean = round(mean(mpg), 1),
+    mpg_sd = round(sd(mpg), 1),
+    hp_mean = round(mean(hp), 0),
+    hp_sd = round(sd(hp), 0)
+  )
+
+kable(summary_table,
+      col.names = c("N", "MPG Mean", "MPG SD", "HP Mean", "HP SD"),
+      caption = "Summary Statistics: Motor Trend Car Data")
+```
+
+Not too shabby! Average fuel efficiency is 20.1 MPG with quite a bit of variation (SD = 6.0).
+
+# Exploring the Data
+
+<!-- TEMPLATE INSTRUCTION: RESULTS VISUALIZATION SECTION
+
+Here's where your pre-generated figures come in!
+See analysis/scripts/03_generate_figures.R for how these were created.
+
+PATTERN:
+1. Load results from analysis/data/derived_data/
+2. Display pre-generated figure with caption
+3. Brief interpretation (what do we learn?)
+
+FIGURE SIZING:
+- Main analysis figures: width = "100%" (full width)
+- Captions should be descriptive and in-line with data interpretation
+- Alt text should be detailed for accessibility
+
+DON'T: re-create these figures inline (they're already generated!)
+DO: reference the pre-generated files and focus on interpretation
+-->
+
+Let's visualize these patterns. I pre-generated these figures using analysis/scripts/03_generate_figures.R:
+
+```{r}
+#| label: eda-overview
+#| fig-cap: "Distribution of fuel efficiency across the dataset. Left: Histogram showing MPG distribution. Right: Boxplots of MPG by cylinder count reveal engines with more cylinders tend to have lower fuel efficiency."
+#| fig-alt: "Two-panel figure: left shows histogram of MPG distribution ranging from ~10-35 mpg, right shows boxplots for 4, 6, and 8 cylinder vehicles"
+knitr::include_graphics("figures/eda-overview.png")
+```
+
+Wow, that's a clear pattern! Cars with fewer cylinders are way more fuel-efficient.
+
+<!-- TEMPLATE INSTRUCTION: AMBIANCE IMAGE 2 (OPTIONAL)
+
+Another atmospheric image to maintain visual engagement.
+Place after first major figure section.
+
+This creates rhythm: text → figure → ambiance image → text → figure
+
+SIZING: width: 100%, height: auto
+PURPOSE: Mental break, maintain engagement, visual balance
+============================================================================ -->
+
+![Visual break - another atmospheric image maintaining engagement](media/images/penguin-hero.jpg){.img-fluid}
+
+## Looking for Relationships
+
+```{r}
+#| label: correlation-analysis
+#| eval: false
+# Find strongest correlations with MPG
+correlations <- cor(mtcars_clean %>% select(where(is.numeric))) %>%
+  as.data.frame() %>%
+  rownames_to_column("var1") %>%
+  pivot_longer(-var1, names_to = "var2", values_to = "correlation") %>%
+  filter(var1 == "mpg", var2 != "mpg") %>%
+  arrange(desc(abs(correlation)))
+
+# Display top 5
+kable(correlations %>% head(5),
+      caption = "Top 5 Correlations with MPG (fuel efficiency)")
+```
+
+🔍 Weight has the strongest correlation with MPG (r = -0.87). Let's visualize that relationship:
+
+```{r}
+#| label: correlation-plot
+#| fig-cap: "Strong negative relationship between vehicle weight and fuel efficiency. Heavier cars consistently get worse mileage, regardless of cylinder count. The fitted regression line (dashed) shows the overall trend."
+#| fig-alt: "Scatter plot with vehicle weight (x-axis, 1000-5500 lbs) vs MPG (y-axis, 10-35 mpg), colored by cylinder count (4/6/8 cyl), with fitted regression line"
+knitr::include_graphics("figures/correlation-plot.png")
+```
+
+Interesting! Heavier cars consistently get worse mileage. Makes sense when you think about it 🚗
+
+![Statistical modeling and quantification approaches](media/images/penguin-hero.jpg){.img-fluid width=100% style="margin: 2rem 0;"}
+
+# Building a Model
+
+<!-- TEMPLATE INSTRUCTION: MAIN ANALYSIS SECTION
+
+This is the heart of your post! Show your model results and interpretation.
+
+STRUCTURE:
+1. Load pre-computed model results from CSV files
+2. Display results in clean tables (using knitr::kable)
+3. Brief interpretation
+4. Show pre-generated model visualization
+
+KEY PRINCIPLE: Results were computed by 02_fit_models.R
+You're just presenting and interpreting them here.
+
+RESULT TABLES:
+- Model coefficients with confidence intervals
+- Model metrics (R², F-stat, p-value)
+- Any diagnostic summaries
+
+AVOID:
+- Re-fitting models inline (wastes time, breaks reproducibility)
+- Long code chunks (show the figure, not the code to generate it)
+- Unexplained statistics (briefly interpret each result)
+============================================================================ -->
+
+Let me fit a simple linear model to quantify this relationship:
+
+```{r}
+#| label: load-model-results
+#| eval: false
+# Load pre-computed model results from 02_fit_models.R
+model_coef <- read_csv("data/derived_data/model_coefficients.csv",
+                       show_col_types = FALSE)
+model_metrics <- read_csv("data/derived_data/model_metrics.csv",
+                         show_col_types = FALSE)
+```
+
+```{r}
+#| label: model-summary-table
+#| eval: false
+# Display model coefficients
+kable(model_coef %>% select(term, estimate, std.error, p.value, conf.low, conf.high),
+      digits = 4,
+      caption = "Linear Regression Results: MPG ~ Weight")
+```
+
+```{r}
+#| label: model-metrics-table
+#| eval: false
+# Display fit metrics
+kable(model_metrics %>% select(r.squared, adj.r.squared, statistic, p.value, df.residual),
+      digits = 4,
+      caption = "Model Fit Metrics")
+```
+
+**The model explains 75% of the variance (R² = 0.75).** This is a reasonably strong fit. For every 1,000 lbs of weight, we lose about 5.3 MPG (95% CI: [-6.5, -4.1]).
+
+```{r}
+#| label: model-visualization
+#| fig-cap: "Linear regression fit showing the relationship between vehicle weight and fuel efficiency. The gray band represents the 95% confidence interval around the fitted line. The fit is quite good, explaining 75% of the variance in MPG."
+#| fig-alt: "Scatter plot with fitted regression line and gray confidence band, showing negative relationship between weight and MPG"
+knitr::include_graphics("figures/model-plot.png")
+```
+
+## Making Predictions
+
+<!-- TEMPLATE INSTRUCTION: PRACTICAL APPLICATION
+
+Show how to use your model for something useful.
+This helps readers see the real-world value of your analysis.
+
+Include concrete examples with actual numbers.
+-->
+
+Let me make some predictions to see how this works in practice:
+
+```{r}
+#| label: predictions
+#| eval: false
+# Predict MPG for different weights
+new_data <- tibble(wt = c(2, 3, 4))
+model <- readRDS("data/derived_data/simple_model.rds")
+predictions <- predict(model, newdata = new_data, interval = "confidence")
+
+cbind(new_data, predictions) %>%
+  kable(digits = 2,
+        caption = "Predicted MPG for Vehicles of Different Weights")
+```
+
+📝 So a 2,000 lb car gets ~30 MPG, while a 4,000 lb car only gets ~15 MPG. That's quite a difference!
+
+# Checking Our Work
+
+<!-- TEMPLATE INSTRUCTION: DIAGNOSTICS SECTION
+
+Show you've validated your assumptions.
+Be transparent about potential issues.
+
+Load pre-generated diagnostic data from model fitting script.
+Display residual plots and outlier analysis.
+-->
+
+Before we trust these results, let's check if our model assumptions hold up:
+
+```{r}
+#| label: load-diagnostics
+#| eval: false
+# Load pre-computed diagnostics
+diagnostics <- read_csv("data/derived_data/model_diagnostics.csv",
+                       show_col_types = FALSE)
+
+# Summary
+outlier_count <- sum(diagnostics$is_outlier)
+cat("Outliers found (>2.5 SD):", outlier_count, "\n")
+cat("Residual SE:", round(sqrt(mean(diagnostics$residuals^2)), 2), "MPG\n")
+```
+
+**Diagnostic checks:** Found 2-3 potential outliers (>2.5 SD) when running the analysis. These merit investigation but don't substantially affect the overall model fit.
+
+Now let's visualize the residuals to check for patterns:
+
+```{r}
+#| label: diagnostics-plot
+#| fig-cap: "Residual diagnostic plot showing standardized residuals vs fitted values. The red dashed lines mark ±2 standard deviations. A good model should show residuals randomly scattered around zero with no patterns. We have a few potential outliers but overall the fit looks reasonable."
+#| fig-alt: "Scatter plot of standardized residuals (y-axis) vs predicted values (x-axis), with reference lines at -2, 0, +2"
+knitr::include_graphics("figures/diagnostics-plot.png")
+```
+
+Looks pretty good! No major patterns in the residuals, though we have a couple of potential outliers worth investigating 🔍
+
+## Things to Watch Out For
+
+<!-- TEMPLATE INSTRUCTION: GOTCHAS SECTION
+
+Share what you learned the hard way.
+Be conversational and personal.
+Help readers avoid your mistakes.
+
+Use first person: "I found that..." "Watch out for..."
+-->
+
+A few gotchas I encountered while working on this:
+
+1. **Don't extrapolate too far** - This model works for weights between 1.5-5.5 thousand lbs. Predicting outside that range? Risky!
+
+2. **Correlation ≠ Causation** - Weight correlates with MPG, but there are confounding variables (engine size, aerodynamics, etc.)
+
+3. **Check your assumptions** - Always plot residuals! A good R² doesn't guarantee your model is appropriate.
+
+4. **Small sample size** - We only have 32 cars. Take the confidence intervals seriously!
+
+<!-- ============================================================================
+AMBIANCE IMAGE 3 (OPTIONAL)
+
+Final atmospheric image, perhaps wrapping up the post visually.
+Place before "Lessons Learned" section.
+
+This creates visual bookends around the main analysis.
+============================================================================ -->
+
+![Concluding visual - tie back to topic theme](media/images/penguin-hero.jpg){.img-fluid}
+![Synthesis and comprehensive understanding development](media/images/penguin-hero.jpg){.img-fluid width=100% style="margin: 2rem 0;"}
+
+# What Did We Learn?
+
+<!-- TEMPLATE INSTRUCTION: LESSONS LEARNT - Ken's Signature Section!
+
+This is Ken's trademark section - always included.
+
+STRUCTURE:
+- Bullet points of key takeaways
+- Tools/packages mastered
+- Concepts understood
+- Skills developed
+- Be specific and actionable
+
+THREE CATEGORIES:
+1. Conceptual Understanding (what did you learn about the domain?)
+2. Technical Skills (what tools/techniques did you master?)
+3. Gotchas and Pitfalls (what could go wrong?)
+-->
+
+## Lessons Learnt
+
+Here's what I took away from this exploration:
+
+**Conceptual Understanding:**
+- Vehicle weight is a strong predictor of fuel efficiency (R² = 0.75)
+- Each 1,000 lbs reduces MPG by ~5.3 miles (95% CI: [-6.5, -4.1])
+- Cylinder count effects are partially mediated through weight
+- Simple models can be surprisingly effective with the right predictor
+
+**Technical Skills:**
+- Using `broom::tidy()` for clean model output formatting ✅
+- Calculating and interpreting confidence intervals for predictions
+- Creating diagnostic plots to validate regression assumptions
+- Combining multiple ggplot visualizations with `patchwork`
+
+**Gotchas and Pitfalls:**
+- Always check residual plots - R² alone isn't enough!
+- Extrapolation beyond data range is dangerous
+- Small sample sizes (n=32) require cautious interpretation
+- Correlation doesn't prove causation (confounding variables matter)
+
+## Limitations
+
+<!-- TEMPLATE INSTRUCTION: LIMITATIONS - Ken's Style
+
+Be honest and transparent.
+Ken acknowledges limitations upfront.
+Keep it concise - bullet points work well.
+
+This shows scientific maturity and helps readers know when your findings apply.
+-->
+
+This analysis has several limitations to keep in mind:
+
+- **Old data**: mtcars is from 1974 - modern vehicles (hybrids, EVs) behave differently
+- **Small sample**: Only 32 observations limits statistical power
+- **Missing variables**: Doesn't account for aerodynamics, transmission type, engine tech
+- **Simple model**: Single predictor ignores important confounders
+- **Limited scope**: Only passenger cars; may not generalize to trucks/SUVs
+
+## Opportunities for Improvement
+
+<!-- TEMPLATE INSTRUCTION: OPPORTUNITIES - Another Ken Signature!
+
+Forward-looking section on what could be done next.
+- Extensions to try
+- Better approaches
+- Future directions
+- Related analyses
+
+This helps readers see where research/learning could go next.
+-->
+
+If I had more time, here's what I'd explore next:
+
+1. **Multiple regression** - Add cylinder count, horsepower, transmission type
+2. **Interaction effects** - Does weight impact differ by number of cylinders?
+3. **Modern data** - Replicate with 2020+ vehicle data to see how relationships changed
+4. **Non-linear models** - Try polynomial regression or splines for better fit
+5. **Machine learning comparison** - How does linear regression compare to random forest?
+6. **Causal inference** - Use techniques to establish causality, not just correlation
+
+# Wrapping Up
+
+<!-- TEMPLATE INSTRUCTION: CONCLUSION - Ken's Style
+
+Short, friendly, forward-looking.
+Ken often invites collaboration and questions.
+Acknowledges ongoing learning.
+Expresses gratitude.
+
+Keep it brief - 2-3 paragraphs max.
+End with 💙 or similar warm closing.
+-->
+
+So that's my journey exploring [topic]! We saw that vehicle weight is a powerful predictor of fuel efficiency, accounting for 75% of the variance. The model is simple but effective, though it has limitations worth keeping in mind.
+
+**Main takeaways:**
+- Weight strongly predicts MPG (R² = 0.75, β = -5.3)
+- Always check model assumptions with diagnostic plots
+- Confidence intervals matter, especially with small samples
+- Simple models can be surprisingly powerful
+
+I learned a lot working through this, especially about [specific technical skill you gained]. There's definitely room for improvement—adding more predictors, trying non-linear models, and using modern data would all be interesting extensions.
+
+**If you're trying this yourself:**
+- Start with exploration before modeling
+- Plot your residuals!
+- Don't trust high R² blindly
+- Report confidence intervals alongside point estimates
+
+Thanks for following along.
+
+# See Also
+
+<!-- TEMPLATE INSTRUCTION: SEE ALSO - Ken's Style
+
+Ken keeps this section VERY simple.
+Links to related blog posts or resources.
+Not an exhaustive bibliography.
+Usually 3-5 key links.
+-->
+
+Related posts and resources:
+
+- [Link to related post 1]
+- [Link to related post 2]
+- [Link to related resource]
+
+**Key Resources:**
+- [R for Data Science](https://r4ds.had.co.nz/) - Free book on tidyverse
+- [Introduction to Statistical Learning](https://www.statlearning.com/) - Free textbook with R code
+- [broom package docs](https://broom.tidymodels.org/) - Tidy model outputs
+- [Cross Validated](https://stats.stackexchange.com/) - Stats Q&A community
+
+---
+
+# Reproducibility
+
+<!-- TEMPLATE INSTRUCTION: REPRODUCIBILITY
+
+The beauty of ZZCOLLAB: readers can fully reproduce your analysis!
+
+Include:
+1. How to run the analysis pipeline
+2. Environment information (Docker, renv)
+3. Session info
+
+Emphasize that all analysis code is in analysis/scripts/ and all figures
+are pre-generated - this post is just the narrative.
+-->
+
+**Data:** mtcars (built-in R dataset, loaded by analysis/scripts/01_prepare_data.R)
+
+**Analysis Pipeline:**
+```bash
+make docker-build
+make docker-post-render
+```
+
+Or step-by-step:
+```bash
+Rscript analysis/scripts/01_prepare_data.R
+Rscript analysis/scripts/02_fit_models.R
+Rscript analysis/scripts/03_generate_figures.R
+quarto render index.qmd
+```
+
+**All Reproducible Code:**
+- `analysis/scripts/01_prepare_data.R` - Data preparation
+- `analysis/scripts/02_fit_models.R` - Model fitting
+- `analysis/scripts/03_generate_figures.R` - Figure generation
+- `R/plotting_utils.R` - Reusable utility functions
+- `analysis/paper/index.qmd` - This blog post (narrative only)
+
+**Session Information:**
+```{r}
+#| echo: false
+sessionInfo()
+```
+
+---
+
+# Let's Connect!
+
+<!-- TEMPLATE INSTRUCTION: ENGAGEMENT - Ken's Style
+
+Ken invites questions and corrections.
+Emphasizes collaboration and learning together.
+Often includes social media links.
+Uses friendly, welcoming tone.
+
+This shows you're human, approachable, and open to feedback.
+-->
+
+*Have questions, suggestions, or spot an error? Let me know!*
+
+- **Twitter/X**: [@rgt47](https://twitter.com/rgt47)
+- **Mastodon**: [@your_mastodon](https://mastodon.social/@username)
+- **GitHub**: [rgt47](https://github.com/rgt47)
+- **Email**: [Contact form](https://rgtlab.org/contact)
+
+**Please reach out** if you:
+- Spot errors or have corrections
+- Have suggestions for improvement
+- Want to discuss the approach
+- Have questions about implementation
+- Just want to connect!
+
+---
+
+<!-- ============================================================================
+TEMPLATE CHECKLIST - Review before publishing
+
+Before publishing your blog post, verify:
+
+☐ YAML Front Matter
+  ☐ Unique, engaging title
+  ☐ Descriptive subtitle
+  ☐ Correct author name
+  ☐ Publication date
+  ☐ 2-3 relevant categories
+  ☐ Brief description (for blog listing)
+  ☐ Hero image path (media/images/...)
+  ☐ document-type: "blog"
+  ☐ draft: false (when ready)
+
+☐ Structure
+  ☐ Introduction with "I didn't know..." hook (2-3 paragraphs)
+  ☐ Motivations section (personal reasons)
+  ☐ Objectives section (numbered list)
+  ☐ Conceptual explanation ("What is X?")
+  ☐ Analysis sections with CODE → OUTPUT → INTERPRETATION
+  ☐ Summary table of key results
+  ☐ Pre-generated figure with caption and alt text
+  ☐ Lessons Learnt section (conceptual + technical + gotchas)
+  ☐ Limitations (honest assessment)
+  ☐ Opportunities for Improvement (future directions)
+  ☐ Conclusion (short, friendly)
+  ☐ See Also (3-5 key links)
+  ☐ Reproducibility section
+
+☐ Visual Design
+  ☐ Hero image at top (80% width)
+  ☐ 2-3 ambiance images for visual rhythm (100% width)
+  ☐ All analysis figures with proper captions and alt text
+  ☐ Consistent image sizing
+  ☐ Professional spacing between sections
+
+☐ Analysis Integration
+  ☐ All analysis code in analysis/scripts/ (01_, 02_, 03_)
+  ☐ No inline model fitting (load results from CSV)
+  ☐ No inline figure generation (load from analysis/figures/)
+  ☐ All data loading from prepared CSVs (not raw)
+  ☐ Proper attribution of utilities (source("R/plotting_utils.R"))
+
+☐ Content Quality
+  ☐ Tone is personal and conversational
+  ☐ Author positioned as learner, not expert
+  ☐ No emoji in narrative text (avoid for PDF compatibility and accessibility)
+  ☐ Explanations are SHORT (2-4 sentences between code blocks)
+  ☐ Results interpreted, not just displayed
+  ☐ No unexplained statistics
+
+☐ Reproducibility
+  ☐ All analysis pipelines documented
+  ☐ Docker/renv setup clear
+  ☐ Reader can clone and reproduce end-to-end
+  ☐ Session info included
+  ☐ Links to raw data/scripts
+
+☐ Metadata
+  ☐ All images have descriptive captions
+  ☐ All figures have alt text
+  ☐ References are properly cited (if applicable)
+  ☐ Author credentials clear
+  ☐ Contact information provided
+
+============================================================================ -->

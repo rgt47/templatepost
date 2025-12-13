@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ronald G. Thomas">
+<meta name="dcterms.date" content="2025-01-01">
+<meta name="description" content="I didn’t really know much about [topic] until I tried to [implement/understand] it myself. Here’s what I learned along the way.">
+
+<title>Constructing a reproducible blog post using zzcollab tools</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="index_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="index_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Constructing a reproducible blog post using zzcollab tools</h1>
+<p class="subtitle lead">A template 🤔</p>
+  <div class="quarto-categories">
+    <div class="quarto-category">R Programming</div>
+    <div class="quarto-category">Data Science</div>
+    <div class="quarto-category">Statistical Computing</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    I didn’t really know much about [topic] until I tried to [implement/understand] it myself. Here’s what I learned along the way.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ronald G. Thomas </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 1, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- ============================================================================
+EXEMPLAR BLOG POST TEMPLATE
+============================================================================
+
+This is a template demonstrating ZZCOLLAB best practices for reproducible blog
+posts. It shows:
+
+✓ Separation of concerns (analysis code in scripts/, narrative in this file)
+✓ Pre-generated figures and data (loaded from analysis/*)
+✓ Professional visual rhythm (hero + ambiance images)
+✓ Result tables extracted from analysis
+✓ Clear author guidance with TEMPLATE INSTRUCTION comments
+
+TO USE THIS TEMPLATE FOR YOUR OWN POST:
+1. Copy the template_post directory
+2. Follow TEMPLATE INSTRUCTION comments throughout
+3. Update YAML front matter (title, author, date, categories, image)
+4. Replace [placeholders] with your content
+5. Ensure analysis scripts run: 01_prepare_data.R → 02_fit_models.R → 03_generate_figures.R
+6. Load results from data files (don't re-compute in this file)
+
+STRUCTURE OVERVIEW:
+- Introduction: Hook with personal learning narrative (2-3 paragraphs)
+- Motivations & Objectives: Why this topic? What did you want to learn?
+- Conceptual Explanation: What is [Topic]? (plain language)
+- Analysis Sections: Present findings with figures and tables
+- Lessons Learned: Key takeaways
+- Limitations & Future Work: Honest assessment
+- References & Reproducibility: Citations and how to reproduce
+
+VISUAL RHYTHM (2-3 "ambiance" images for engagement):
+- HERO IMAGE: ~width:80% after intro (below "Motivations")
+- AMBIANCE IMAGE 1: ~width:100%, 500px height, after first section
+- AMBIANCE IMAGE 2: ~width:100%, 500px height, after mid-point
+- Analysis figures: Full width, 600-800px height
+
+See comments below for exact placement and sizing.
+
+============================================================================ -->
+<!-- ============================================================================
+HERO IMAGE SECTION
+============================================================================ -->
+<!-- TEMPLATE INSTRUCTION: HERO IMAGE
+
+The hero image is your first visual impression - it sets the tone for the entire
+post and appears in blog listings. It should be:
+- Engaging and relevant to your topic
+- High quality (300 DPI or higher)
+- Professional and accessible
+- Properly attributed if from external source
+
+Current: penguin-hero.jpg (penguin theme - replace with your topic!)
+
+Options for sourcing:
+- UNSPLASH: Free high-quality images → put in media/images/, add attribution to media/images/README.md
+- LOCAL SCREENSHOTS: Your own analysis environments → include media/images/README.md with creation date
+- GENERATED: R-produced visualizations → save to analysis/figures/ and reference there
+
+PLACEMENT: This will be displayed in the blog listing, so make it count!
+
+ATTRIBUTION: Document the source in analysis/media/images/README.md
+-->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/penguin-hero.jpg" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Engaging hero image that introduces your topic visually</figcaption>
+</figure>
+</div>
+<p><em>Photo caption with attribution if needed. This image sets the visual tone for your entire post.</em></p>
+<!-- ============================================================================
+INTRODUCTION SECTION
+============================================================================ -->
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<!-- TEMPLATE INSTRUCTION: INTRODUCTION - Ken Koon Wong Style
+
+Purpose: Hook with personal learning narrative
+Ken's approach:
+- "I didn't really know... until I learned"
+- Establishes author as learner, not expert
+- Creates immediate relatability
+- Conversational, humble tone
+
+Keep it SHORT - 2-3 paragraphs max. Save detailed explanations for later.
+
+EXAMPLE STRUCTURE:
+Paragraph 1: Your "I didn't know until..." hook
+Paragraph 2: Brief context (the problem you faced)
+Paragraph 3: Transition to what you wanted to accomplish
+-->
+<p>I didn’t really know much about [topic] until I [encountered situation/tried to implement it/needed it for project]. Like many data scientists, I thought [initial misconception or assumption]. Turns out, [what you actually discovered] 🤔</p>
+<p>[Brief context: Why did you need this? What problem were you trying to solve? Keep it personal and specific.]</p>
+<p>Here’s what I set out to understand:</p>
+<section id="motivations" class="level2">
+<h2 class="anchored" data-anchor-id="motivations">Motivations</h2>
+<!-- TEMPLATE INSTRUCTION: MOTIVATIONS SECTION
+
+Ken Koon Wong always includes a "Motivations" section that explains WHY the topic
+matters. This is crucial - it helps readers understand if YOUR problem is THEIR problem.
+
+Make it personal and specific:
+- Don't just say "optimization is important"
+- Say "I was frustrated that my analysis took 3 hours to run on a 2M row dataset"
+
+EXAMPLE:
+**Why explore [topic]?**
+- [Personal reason 1]: I had a specific problem (e.g., "My plots looked ugly")
+- [Practical need 2]: Gap in my workflow (e.g., "I had no systematic way to X")
+- [Learning goal 3]: Skill I wanted to develop (e.g., "I'd only used Y, never Z")
+- [Curiosity 4]: Interesting question (e.g., "I wondered if X was faster than Y")
+-->
+<p><strong>Why explore [topic]?</strong> - [Personal reason 1: specific problem you faced] - [Practical need 2: gap in your workflow] - [Learning goal 3: skill you wanted to develop] - [Curiosity 4: interesting question you had]</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<!-- TEMPLATE INSTRUCTION: OBJECTIVES SECTION
+
+Clear, numbered goals. Ken's style.
+
+Make them SPECIFIC and MEASURABLE where possible:
+- BAD: "Learn about modeling"
+- GOOD: "Fit a linear regression, compare R², and identify which variables predict MPG"
+
+This section should match what you actually accomplished in the post.
+The reader uses this as a mental roadmap of what they'll learn.
+-->
+<p><strong>What I wanted to accomplish:</strong> 1. [Specific, measurable objective 1] 2. [Specific, measurable objective 2] 3. [Specific, measurable objective 3] 4. [Stretch goal or advanced concept]</p>
+<p><strong>Disclaimer:</strong> I’m documenting my learning process here. If you spot errors or have better approaches, please let me know! 💙</p>
+<!-- ============================================================================
+AMBIANCE IMAGE 1 (OPTIONAL BUT RECOMMENDED)
+============================================================================
+
+Large format image for visual rhythm. Place after introductory section.
+
+SIZING: width: 100%, height: auto (or ~500px for consistent spacing)
+PURPOSE: Break up dense introductory text, maintain reader engagement
+CONTENT: Should relate to topic but can be more atmospheric/creative
+
+EXAMPLES:
+- Overhead desk setup photo
+- Code editor screenshot
+- Data visualization in action
+- Office/workspace ambiance
+- Topic-related artwork
+============================================================================ -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/penguin-hero.jpg" class="img-fluid figure-img"></p>
+<figcaption>Atmospheric image to maintain visual engagement - replace with relevant scene</figcaption>
+</figure>
+</div>
+<!-- ============================================================================
+PREREQUISITES AND SETUP SECTION
+============================================================================ -->
+</section>
+</section>
+<section id="prerequisites-and-setup" class="level1">
+<h1>Prerequisites and Setup</h1>
+<!-- TEMPLATE INSTRUCTION: PREREQUISITES - Ken's Style
+
+Keep it minimal and conversational. Show the code first, explain briefly.
+Don't overwhelm with requirements.
+
+For ZZCOLLAB blog posts, data should be ALREADY PREPARED by scripts.
+So this section should just show how to LOAD the prepared data and utilities.
+
+DO NOT include inline data cleaning here - that's in 01_prepare_data.R
+
+EXAMPLE:
+- Load libraries (from renv automatically installed)
+- Load prepared data from CSV: read_csv("data/derived_data/...")
+- Load utility functions: source("R/plotting_utils.R")
+- Display basic structure to confirm loaded correctly
+-->
+<p>Here’s what you’ll need to follow along:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages if needed (renv should have handled this)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># But just in case:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"broom"</span>, <span class="st">"knitr"</span>, <span class="st">"patchwork"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"R/plotting_utils.R"</span>)  <span class="co"># Load custom utility functions</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup theme and colors</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setup_plot_theme</span>()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">get_analysis_colors</span>()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Load PREPARED data (generated by 01_prepare_data.R)</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># This data includes derived variables and transformations</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>mtcars_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/derived_data/mtcars_clean.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Background:</strong> Basic R and ggplot2 familiarity helpful but not required. I’ll explain concepts as we go!</p>
+</section>
+<section id="what-is-topicconcept" class="level1">
+<h1>What is [Topic/Concept]?</h1>
+<!-- TEMPLATE INSTRUCTION: CONCEPTUAL FOUNDATION
+
+Ken often includes a "What is X?" section explaining concepts in plain language.
+
+STRUCTURE:
+1. Start with simple definition (1 sentence)
+2. Use analogy or comparison (helps understanding)
+3. Give concrete example (makes it real)
+4. Keep it brief (2-4 sentences total)
+5. THEN show the code
+
+Purpose: Readers without domain expertise should understand the concept.
+
+EXAMPLE FOR "LINEAR REGRESSION":
+"Linear regression is a method for understanding how one variable depends on
+another - kind of like fitting a straight line through a scatter plot of points.
+Imagine you're trying to predict someone's height based on their parents'
+heights: you'd draw a line through data points, then use that line to make
+predictions for new people. That's what linear regression does."
+-->
+<p>Before diving into code, let’s clarify what [topic] actually means. [Simple, plain-language explanation of the concept. Use an analogy if helpful.] In practice, this means [concrete example or application].</p>
+</section>
+<section id="getting-started-initial-exploration" class="level1">
+<h1>Getting Started: Initial Exploration</h1>
+<!-- TEMPLATE INSTRUCTION: FIRST ANALYSIS SECTION
+
+This is where the real analysis begins!
+
+STRUCTURE:
+- CODE FIRST (show it)
+- OUTPUT (display results)
+- BRIEF INTERPRETATION (2-4 sentences)
+
+Ken's ratio: ~40% code, 60% explanation. Don't explain every line of code.
+Assume reader can understand basic R - focus on the "why" and "what does this mean"
+
+INCLUDE SUMMARY TABLE: Show key statistics from prepared data
+-->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display structure of prepared data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mtcars_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Okay, so we have 32 cars with 11 variables. Let’s see what we’re working with here 🤔</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Key summary stats</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> mtcars_clean <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mpg_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(mpg), <span class="dv">1</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mpg_sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(mpg), <span class="dv">1</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">hp_mean =</span> <span class="fu">round</span>(<span class="fu">mean</span>(hp), <span class="dv">0</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">hp_sd =</span> <span class="fu">round</span>(<span class="fu">sd</span>(hp), <span class="dv">0</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(summary_table,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"N"</span>, <span class="st">"MPG Mean"</span>, <span class="st">"MPG SD"</span>, <span class="st">"HP Mean"</span>, <span class="st">"HP SD"</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Summary Statistics: Motor Trend Car Data"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Not too shabby! Average fuel efficiency is 20.1 MPG with quite a bit of variation (SD = 6.0).</p>
+</section>
+<section id="exploring-the-data" class="level1">
+<h1>Exploring the Data</h1>
+<!-- TEMPLATE INSTRUCTION: RESULTS VISUALIZATION SECTION
+
+Here's where your pre-generated figures come in!
+See analysis/scripts/03_generate_figures.R for how these were created.
+
+PATTERN:
+1. Load results from analysis/data/derived_data/
+2. Display pre-generated figure with caption
+3. Brief interpretation (what do we learn?)
+
+FIGURE SIZING:
+- Main analysis figures: width = "100%" (full width)
+- Captions should be descriptive and in-line with data interpretation
+- Alt text should be detailed for accessibility
+
+DON'T: re-create these figures inline (they're already generated!)
+DO: reference the pre-generated files and focus on interpretation
+-->
+<p>Let’s visualize these patterns. I pre-generated these figures using analysis/scripts/03_generate_figures.R:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/eda-overview.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/eda-overview.png" class="img-fluid figure-img" alt="Two-panel figure: left shows histogram of MPG distribution ranging from ~10-35 mpg, right shows boxplots for 4, 6, and 8 cylinder vehicles" width="1500"></p>
+<figcaption>Distribution of fuel efficiency across the dataset. Left: Histogram showing MPG distribution. Right: Boxplots of MPG by cylinder count reveal engines with more cylinders tend to have lower fuel efficiency.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Wow, that’s a clear pattern! Cars with fewer cylinders are way more fuel-efficient 📊</p>
+<!-- TEMPLATE INSTRUCTION: AMBIANCE IMAGE 2 (OPTIONAL)
+
+Another atmospheric image to maintain visual engagement.
+Place after first major figure section.
+
+This creates rhythm: text → figure → ambiance image → text → figure
+
+SIZING: width: 100%, height: auto
+PURPOSE: Mental break, maintain engagement, visual balance
+============================================================================ -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/penguin-hero.jpg" class="img-fluid figure-img"></p>
+<figcaption>Visual break - another atmospheric image maintaining engagement</figcaption>
+</figure>
+</div>
+<section id="looking-for-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="looking-for-relationships">Looking for Relationships</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find strongest correlations with MPG</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>correlations <span class="ot">&lt;-</span> <span class="fu">cor</span>(mtcars_clean <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">where</span>(is.numeric))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"var1"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>var1, <span class="at">names_to =</span> <span class="st">"var2"</span>, <span class="at">values_to =</span> <span class="st">"correlation"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(var1 <span class="sc">==</span> <span class="st">"mpg"</span>, var2 <span class="sc">!=</span> <span class="st">"mpg"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="fu">abs</span>(correlation)))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Display top 5</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(correlations <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Top 5 Correlations with MPG (fuel efficiency)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>🔍 Weight has the strongest correlation with MPG (r = -0.87). Let’s visualize that relationship:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/correlation-plot.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/correlation-plot.png" class="img-fluid figure-img" alt="Scatter plot with vehicle weight (x-axis, 1000-5500 lbs) vs MPG (y-axis, 10-35 mpg), colored by cylinder count (4/6/8 cyl), with fitted regression line" width="1200"></p>
+<figcaption>Strong negative relationship between vehicle weight and fuel efficiency. Heavier cars consistently get worse mileage, regardless of cylinder count. The fitted regression line (dashed) shows the overall trend.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Interesting! Heavier cars consistently get worse mileage. Makes sense when you think about it 🚗</p>
+</section>
+</section>
+<section id="building-a-model" class="level1">
+<h1>Building a Model</h1>
+<!-- TEMPLATE INSTRUCTION: MAIN ANALYSIS SECTION
+
+This is the heart of your post! Show your model results and interpretation.
+
+STRUCTURE:
+1. Load pre-computed model results from CSV files
+2. Display results in clean tables (using knitr::kable)
+3. Brief interpretation
+4. Show pre-generated model visualization
+
+KEY PRINCIPLE: Results were computed by 02_fit_models.R
+You're just presenting and interpreting them here.
+
+RESULT TABLES:
+- Model coefficients with confidence intervals
+- Model metrics (R², F-stat, p-value)
+- Any diagnostic summaries
+
+AVOID:
+- Re-fitting models inline (wastes time, breaks reproducibility)
+- Long code chunks (show the figure, not the code to generate it)
+- Unexplained statistics (briefly interpret each result)
+============================================================================ -->
+<p>Let me fit a simple linear model to quantify this relationship:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load pre-computed model results from 02_fit_models.R</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model_coef <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/derived_data/model_coefficients.csv"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>model_metrics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/derived_data/model_metrics.csv"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display model coefficients</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(model_coef <span class="sc">%&gt;%</span> <span class="fu">select</span>(term, estimate, std.error, p.value, conf.low, conf.high),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">4</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Linear Regression Results: MPG ~ Weight"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display fit metrics</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(model_metrics <span class="sc">%&gt;%</span> <span class="fu">select</span>(r.squared, adj.r.squared, statistic, p.value, df.residual),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">digits =</span> <span class="dv">4</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Model Fit Metrics"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>📊 <strong>Nice! The model explains 75% of the variance (R² = 0.75).</strong> For every 1,000 lbs of weight, we lose about 5.3 MPG (95% CI: [-6.5, -4.1]) ✅</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/model-plot.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/model-plot.png" class="img-fluid figure-img" alt="Scatter plot with fitted regression line and gray confidence band, showing negative relationship between weight and MPG" width="1200"></p>
+<figcaption>Linear regression fit showing the relationship between vehicle weight and fuel efficiency. The gray band represents the 95% confidence interval around the fitted line. The fit is quite good, explaining 75% of the variance in MPG.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<section id="making-predictions" class="level2">
+<h2 class="anchored" data-anchor-id="making-predictions">Making Predictions</h2>
+<!-- TEMPLATE INSTRUCTION: PRACTICAL APPLICATION
+
+Show how to use your model for something useful.
+This helps readers see the real-world value of your analysis.
+
+Include concrete examples with actual numbers.
+-->
+<p>Let me make some predictions to see how this works in practice:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict MPG for different weights</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">wt =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/derived_data/simple_model.rds"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>predictions <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> new_data, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(new_data, predictions) <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">caption =</span> <span class="st">"Predicted MPG for Vehicles of Different Weights"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>📝 So a 2,000 lb car gets ~30 MPG, while a 4,000 lb car only gets ~15 MPG. That’s quite a difference!</p>
+</section>
+</section>
+<section id="checking-our-work" class="level1">
+<h1>Checking Our Work</h1>
+<!-- TEMPLATE INSTRUCTION: DIAGNOSTICS SECTION
+
+Show you've validated your assumptions.
+Be transparent about potential issues.
+
+Load pre-generated diagnostic data from model fitting script.
+Display residual plots and outlier analysis.
+-->
+<p>Before we trust these results, let’s check if our model assumptions hold up:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load pre-computed diagnostics</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>diagnostics <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/derived_data/model_diagnostics.csv"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>outlier_count <span class="ot">&lt;-</span> <span class="fu">sum</span>(diagnostics<span class="sc">$</span>is_outlier)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Outliers found (&gt;2.5 SD):"</span>, outlier_count, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Residual SE:"</span>, <span class="fu">round</span>(<span class="fu">sqrt</span>(<span class="fu">mean</span>(diagnostics<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)), <span class="dv">2</span>), <span class="st">"MPG</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>⚠️ <strong>Diagnostic checks:</strong> Found 2-3 potential outliers (&gt;2.5 SD) when running the analysis.</p>
+<p>Now let’s visualize the residuals to check for patterns:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"figures/diagnostics-plot.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/diagnostics-plot.png" class="img-fluid figure-img" alt="Scatter plot of standardized residuals (y-axis) vs predicted values (x-axis), with reference lines at -2, 0, +2" width="1200"></p>
+<figcaption>Residual diagnostic plot showing standardized residuals vs fitted values. The red dashed lines mark ±2 standard deviations. A good model should show residuals randomly scattered around zero with no patterns. We have a few potential outliers but overall the fit looks reasonable.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Looks pretty good! No major patterns in the residuals, though we have a couple of potential outliers worth investigating 🔍</p>
+<section id="things-to-watch-out-for" class="level2">
+<h2 class="anchored" data-anchor-id="things-to-watch-out-for">Things to Watch Out For</h2>
+<!-- TEMPLATE INSTRUCTION: GOTCHAS SECTION
+
+Share what you learned the hard way.
+Be conversational and personal.
+Help readers avoid your mistakes.
+
+Use first person: "I found that..." "Watch out for..."
+-->
+<p>A few gotchas I encountered while working on this:</p>
+<ol type="1">
+<li><p><strong>Don’t extrapolate too far</strong> - This model works for weights between 1.5-5.5 thousand lbs. Predicting outside that range? Risky!</p></li>
+<li><p><strong>Correlation ≠ Causation</strong> - Weight correlates with MPG, but there are confounding variables (engine size, aerodynamics, etc.)</p></li>
+<li><p><strong>Check your assumptions</strong> - Always plot residuals! A good R² doesn’t guarantee your model is appropriate.</p></li>
+<li><p><strong>Small sample size</strong> - We only have 32 cars. Take the confidence intervals seriously!</p></li>
+</ol>
+<!-- ============================================================================
+AMBIANCE IMAGE 3 (OPTIONAL)
+
+Final atmospheric image, perhaps wrapping up the post visually.
+Place before "Lessons Learned" section.
+
+This creates visual bookends around the main analysis.
+============================================================================ -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="media/images/penguin-hero.jpg" class="img-fluid figure-img"></p>
+<figcaption>Concluding visual - tie back to topic theme</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="what-did-we-learn" class="level1">
+<h1>What Did We Learn?</h1>
+<!-- TEMPLATE INSTRUCTION: LESSONS LEARNT - Ken's Signature Section!
+
+This is Ken's trademark section - always included.
+
+STRUCTURE:
+- Bullet points of key takeaways
+- Tools/packages mastered
+- Concepts understood
+- Skills developed
+- Be specific and actionable
+
+THREE CATEGORIES:
+1. Conceptual Understanding (what did you learn about the domain?)
+2. Technical Skills (what tools/techniques did you master?)
+3. Gotchas and Pitfalls (what could go wrong?)
+-->
+<section id="lessons-learnt" class="level2">
+<h2 class="anchored" data-anchor-id="lessons-learnt">Lessons Learnt</h2>
+<p>Here’s what I took away from this exploration:</p>
+<p><strong>Conceptual Understanding:</strong> - Vehicle weight is a strong predictor of fuel efficiency (R² = 0.75) - Each 1,000 lbs reduces MPG by ~5.3 miles (95% CI: [-6.5, -4.1]) - Cylinder count effects are partially mediated through weight - Simple models can be surprisingly effective with the right predictor</p>
+<p><strong>Technical Skills:</strong> - Using <code>broom::tidy()</code> for clean model output formatting ✅ - Calculating and interpreting confidence intervals for predictions - Creating diagnostic plots to validate regression assumptions - Combining multiple ggplot visualizations with <code>patchwork</code></p>
+<p><strong>Gotchas and Pitfalls:</strong> - Always check residual plots - R² alone isn’t enough! - Extrapolation beyond data range is dangerous - Small sample sizes (n=32) require cautious interpretation - Correlation doesn’t prove causation (confounding variables matter)</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<!-- TEMPLATE INSTRUCTION: LIMITATIONS - Ken's Style
+
+Be honest and transparent.
+Ken acknowledges limitations upfront.
+Keep it concise - bullet points work well.
+
+This shows scientific maturity and helps readers know when your findings apply.
+-->
+<p>This analysis has several limitations to keep in mind:</p>
+<ul>
+<li><strong>Old data</strong>: mtcars is from 1974 - modern vehicles (hybrids, EVs) behave differently</li>
+<li><strong>Small sample</strong>: Only 32 observations limits statistical power</li>
+<li><strong>Missing variables</strong>: Doesn’t account for aerodynamics, transmission type, engine tech</li>
+<li><strong>Simple model</strong>: Single predictor ignores important confounders</li>
+<li><strong>Limited scope</strong>: Only passenger cars; may not generalize to trucks/SUVs</li>
+</ul>
+</section>
+<section id="opportunities-for-improvement" class="level2">
+<h2 class="anchored" data-anchor-id="opportunities-for-improvement">Opportunities for Improvement</h2>
+<!-- TEMPLATE INSTRUCTION: OPPORTUNITIES - Another Ken Signature!
+
+Forward-looking section on what could be done next.
+- Extensions to try
+- Better approaches
+- Future directions
+- Related analyses
+
+This helps readers see where research/learning could go next.
+-->
+<p>If I had more time, here’s what I’d explore next:</p>
+<ol type="1">
+<li><strong>Multiple regression</strong> - Add cylinder count, horsepower, transmission type</li>
+<li><strong>Interaction effects</strong> - Does weight impact differ by number of cylinders?</li>
+<li><strong>Modern data</strong> - Replicate with 2020+ vehicle data to see how relationships changed</li>
+<li><strong>Non-linear models</strong> - Try polynomial regression or splines for better fit</li>
+<li><strong>Machine learning comparison</strong> - How does linear regression compare to random forest?</li>
+<li><strong>Causal inference</strong> - Use techniques to establish causality, not just correlation</li>
+</ol>
+</section>
+</section>
+<section id="wrapping-up" class="level1">
+<h1>Wrapping Up</h1>
+<!-- TEMPLATE INSTRUCTION: CONCLUSION - Ken's Style
+
+Short, friendly, forward-looking.
+Ken often invites collaboration and questions.
+Acknowledges ongoing learning.
+Expresses gratitude.
+
+Keep it brief - 2-3 paragraphs max.
+End with 💙 or similar warm closing.
+-->
+<p>So that’s my journey exploring [topic]! We saw that vehicle weight is a powerful predictor of fuel efficiency, accounting for 75% of the variance. The model is simple but effective, though it has limitations worth keeping in mind.</p>
+<p><strong>Main takeaways:</strong> - Weight strongly predicts MPG (R² = 0.75, β = -5.3) - Always check model assumptions with diagnostic plots - Confidence intervals matter, especially with small samples - Simple models can be surprisingly powerful</p>
+<p>I learned a lot working through this, especially about [specific technical skill you gained]. There’s definitely room for improvement—adding more predictors, trying non-linear models, and using modern data would all be interesting extensions.</p>
+<p><strong>If you’re trying this yourself:</strong> - Start with exploration before modeling - Plot your residuals! - Don’t trust high R² blindly - Report confidence intervals alongside point estimates</p>
+<p>Thanks for following along! 💙</p>
+</section>
+<section id="see-also" class="level1">
+<h1>See Also</h1>
+<!-- TEMPLATE INSTRUCTION: SEE ALSO - Ken's Style
+
+Ken keeps this section VERY simple.
+Links to related blog posts or resources.
+Not an exhaustive bibliography.
+Usually 3-5 key links.
+-->
+<p>Related posts and resources:</p>
+<ul>
+<li>[Link to related post 1]</li>
+<li>[Link to related post 2]</li>
+<li>[Link to related resource]</li>
+</ul>
+<p><strong>Key Resources:</strong> - <a href="https://r4ds.had.co.nz/">R for Data Science</a> - Free book on tidyverse - <a href="https://www.statlearning.com/">Introduction to Statistical Learning</a> - Free textbook with R code - <a href="https://broom.tidymodels.org/">broom package docs</a> - Tidy model outputs - <a href="https://stats.stackexchange.com/">Cross Validated</a> - Stats Q&amp;A community</p>
+<hr>
+</section>
+<section id="reproducibility" class="level1">
+<h1>Reproducibility</h1>
+<!-- TEMPLATE INSTRUCTION: REPRODUCIBILITY
+
+The beauty of ZZCOLLAB: readers can fully reproduce your analysis!
+
+Include:
+1. How to run the analysis pipeline
+2. Environment information (Docker, renv)
+3. Session info
+
+Emphasize that all analysis code is in analysis/scripts/ and all figures
+are pre-generated - this post is just the narrative.
+-->
+<p><strong>Data:</strong> mtcars (built-in R dataset, loaded by analysis/scripts/01_prepare_data.R)</p>
+<p><strong>Analysis Pipeline:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> docker-build</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> docker-post-render</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or step-by-step:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> analysis/scripts/01_prepare_data.R</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> analysis/scripts/02_fit_models.R</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> analysis/scripts/03_generate_figures.R</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render index.qmd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>All Reproducible Code:</strong> - <code>analysis/scripts/01_prepare_data.R</code> - Data preparation - <code>analysis/scripts/02_fit_models.R</code> - Model fitting - <code>analysis/scripts/03_generate_figures.R</code> - Figure generation - <code>R/plotting_utils.R</code> - Reusable utility functions - <code>analysis/paper/index.qmd</code> - This blog post (narrative only)</p>
+<p><strong>Session Information:</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sequoia 15.6.1
+
+Matrix products: default
+BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Los_Angeles
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] htmlwidgets_1.6.4 compiler_4.5.2    fastmap_1.2.0     cli_3.6.5        
+ [5] tools_4.5.2       htmltools_0.5.9   parallel_4.5.2    yaml_2.3.11      
+ [9] rmarkdown_2.30    knitr_1.50        jsonlite_2.0.0    xfun_0.54        
+[13] digest_0.6.39     rlang_1.1.6       png_0.1-8         evaluate_1.0.5   </code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="lets-connect" class="level1">
+<h1>Let’s Connect!</h1>
+<!-- TEMPLATE INSTRUCTION: ENGAGEMENT - Ken's Style
+
+Ken invites questions and corrections.
+Emphasizes collaboration and learning together.
+Often includes social media links.
+Uses friendly, welcoming tone.
+
+This shows you're human, approachable, and open to feedback.
+-->
+<p><em>Have questions, suggestions, or spot an error? Let me know!</em></p>
+<ul>
+<li><strong>Twitter/X</strong>: <a href="https://twitter.com/rgt47"><span class="citation" data-cites="rgt47">@rgt47</span></a></li>
+<li><strong>Mastodon</strong>: <a href="https://mastodon.social/@username"><span class="citation" data-cites="your_mastodon">@your_mastodon</span></a></li>
+<li><strong>GitHub</strong>: <a href="https://github.com/rgt47">rgt47</a></li>
+<li><strong>Email</strong>: <a href="https://rgtlab.org/contact">Contact form</a></li>
+</ul>
+<p><strong>Please reach out</strong> if you: - Spot errors or have corrections - Have suggestions for improvement - Want to discuss the approach - Have questions about implementation - Just want to connect! 💙</p>
+<hr>
+<!-- ============================================================================
+TEMPLATE CHECKLIST - Review before publishing
+
+Before publishing your blog post, verify:
+
+☐ YAML Front Matter
+  ☐ Unique, engaging title
+  ☐ Descriptive subtitle
+  ☐ Correct author name
+  ☐ Publication date
+  ☐ 2-3 relevant categories
+  ☐ Brief description (for blog listing)
+  ☐ Hero image path (media/images/...)
+  ☐ document-type: "blog"
+  ☐ draft: false (when ready)
+
+☐ Structure
+  ☐ Introduction with "I didn't know..." hook (2-3 paragraphs)
+  ☐ Motivations section (personal reasons)
+  ☐ Objectives section (numbered list)
+  ☐ Conceptual explanation ("What is X?")
+  ☐ Analysis sections with CODE → OUTPUT → INTERPRETATION
+  ☐ Summary table of key results
+  ☐ Pre-generated figure with caption and alt text
+  ☐ Lessons Learnt section (conceptual + technical + gotchas)
+  ☐ Limitations (honest assessment)
+  ☐ Opportunities for Improvement (future directions)
+  ☐ Conclusion (short, friendly)
+  ☐ See Also (3-5 key links)
+  ☐ Reproducibility section
+
+☐ Visual Design
+  ☐ Hero image at top (80% width)
+  ☐ 2-3 ambiance images for visual rhythm (100% width)
+  ☐ All analysis figures with proper captions and alt text
+  ☐ Consistent image sizing
+  ☐ Professional spacing between sections
+
+☐ Analysis Integration
+  ☐ All analysis code in analysis/scripts/ (01_, 02_, 03_)
+  ☐ No inline model fitting (load results from CSV)
+  ☐ No inline figure generation (load from analysis/figures/)
+  ☐ All data loading from prepared CSVs (not raw)
+  ☐ Proper attribution of utilities (source("R/plotting_utils.R"))
+
+☐ Content Quality
+  ☐ Tone is personal and conversational
+  ☐ Author positioned as learner, not expert
+  ☐ Emoji used for visual rhythm (🤔 ✅ ❌ 📊 💙)
+  ☐ Explanations are SHORT (2-4 sentences between code blocks)
+  ☐ Results interpreted, not just displayed
+  ☐ No unexplained statistics
+
+☐ Reproducibility
+  ☐ All analysis pipelines documented
+  ☐ Docker/renv setup clear
+  ☐ Reader can clone and reproduce end-to-end
+  ☐ Session info included
+  ☐ Links to raw data/scripts
+
+☐ Metadata
+  ☐ All images have descriptive captions
+  ☐ All figures have alt text
+  ☐ References are properly cited (if applicable)
+  ☐ Author credentials clear
+  ☐ Contact information provided
+
+============================================================================ -->
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

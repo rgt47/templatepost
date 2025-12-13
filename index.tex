@@ -1,0 +1,856 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Your Engaging Title Here: A Learning Journey},
+  pdfauthor={Ronald G. Thomas},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Your Engaging Title Here: A Learning Journey}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Notes to myself on
+{[}discovering/implementing/understanding{]} {[}topic{]} 🤔}
+\author{Ronald G. Thomas}
+\date{2025-01-01}
+\begin{document}
+\maketitle
+
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{../../images/posts/penguins-library-7755210_1280.jpg}}
+
+}
+
+\caption{Engaging hero image that introduces your topic visually}
+
+\end{figure}%
+
+\emph{Photo caption with attribution if needed. This image sets the
+visual tone for your entire post.}
+
+\section{Introduction}\label{introduction}
+
+I didn't really know much about {[}topic{]} until I {[}encountered
+situation/tried to implement it/needed it for project{]}. Like many data
+scientists, I thought {[}initial misconception or assumption{]}. Turns
+out, {[}what you actually discovered{]} 🤔
+
+{[}Brief context: Why did you need this? What problem were you trying to
+solve? Keep it personal and specific.{]}
+
+Here's what I set out to understand:
+
+\subsection{Motivations}\label{motivations}
+
+\textbf{Why explore {[}topic{]}?} - {[}Personal reason 1: specific
+problem you faced{]} - {[}Practical need 2: gap in your workflow{]} -
+{[}Learning goal 3: skill you wanted to develop{]} - {[}Curiosity 4:
+interesting question you had{]}
+
+\subsection{Objectives}\label{objectives}
+
+\textbf{What I wanted to accomplish:} 1. {[}Specific, measurable
+objective 1{]} 2. {[}Specific, measurable objective 2{]} 3. {[}Specific,
+measurable objective 3{]} 4. {[}Stretch goal or advanced concept{]}
+
+\textbf{Disclaimer:} I'm documenting my learning process here. If you
+spot errors or have better approaches, please let me know! 💙
+
+\section{Prerequisites and Setup}\label{prerequisites-and-setup}
+
+Here's what you'll need to follow along:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install packages if needed}
+\FunctionTok{install.packages}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"broom"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{, }\StringTok{"patchwork"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load libraries}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(broom)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(patchwork)}
+
+\CommentTok{\# Set plotting theme}
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{12}\NormalTok{))}
+
+\CommentTok{\# Custom color palette}
+\NormalTok{custom\_colors }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#FF6B6B"}\NormalTok{, }\StringTok{"\#4ECDC4"}\NormalTok{, }\StringTok{"\#45B7D1"}\NormalTok{, }\StringTok{"\#96CEB4"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Background:} Basic R and ggplot2 familiarity helpful but not
+required. I'll explain concepts as we go!
+
+\section{What is {[}Topic/Concept{]}?}\label{what-is-topicconcept}
+
+Before diving into code, let's clarify what {[}topic{]} actually means.
+{[}Simple, plain-language explanation of the concept. Use an analogy if
+helpful.{]} In practice, this means {[}concrete example or
+application{]}.
+
+\section{Getting Started: Initial
+Exploration}\label{getting-started-initial-exploration}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load data}
+\FunctionTok{data}\NormalTok{(mtcars)}
+
+\CommentTok{\# Display structure}
+\FunctionTok{glimpse}\NormalTok{(mtcars)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 32
+Columns: 11
+$ mpg  <dbl> 21.0, 21.0, 22.8, 21.4, 18.7, 18.1, 14.3, 24.4, 22.8, 19.2, 17.8,~
+$ cyl  <dbl> 6, 6, 4, 6, 8, 6, 8, 4, 4, 6, 6, 8, 8, 8, 8, 8, 8, 4, 4, 4, 4, 8,~
+$ disp <dbl> 160.0, 160.0, 108.0, 258.0, 360.0, 225.0, 360.0, 146.7, 140.8, 16~
+$ hp   <dbl> 110, 110, 93, 110, 175, 105, 245, 62, 95, 123, 123, 180, 180, 180~
+$ drat <dbl> 3.90, 3.90, 3.85, 3.08, 3.15, 2.76, 3.21, 3.69, 3.92, 3.92, 3.92,~
+$ wt   <dbl> 2.620, 2.875, 2.320, 3.215, 3.440, 3.460, 3.570, 3.190, 3.150, 3.~
+$ qsec <dbl> 16.46, 17.02, 18.61, 19.44, 17.02, 20.22, 15.84, 20.00, 22.90, 18~
+$ vs   <dbl> 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0,~
+$ am   <dbl> 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,~
+$ gear <dbl> 4, 4, 4, 3, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3,~
+$ carb <dbl> 4, 4, 1, 1, 2, 1, 4, 2, 2, 4, 4, 3, 3, 3, 4, 4, 4, 1, 2, 1, 1, 2,~
+\end{verbatim}
+
+Okay, so we have 32 cars with 11 variables. Let's see what we're working
+with here 🤔
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Key summary stats}
+\NormalTok{summary\_table }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarise}\NormalTok{(}
+    \AttributeTok{n =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{mpg\_mean =} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(mpg), }\DecValTok{1}\NormalTok{),}
+    \AttributeTok{mpg\_sd =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sd}\NormalTok{(mpg), }\DecValTok{1}\NormalTok{),}
+    \AttributeTok{hp\_mean =} \FunctionTok{round}\NormalTok{(}\FunctionTok{mean}\NormalTok{(hp), }\DecValTok{0}\NormalTok{),}
+    \AttributeTok{hp\_sd =} \FunctionTok{round}\NormalTok{(}\FunctionTok{sd}\NormalTok{(hp), }\DecValTok{0}\NormalTok{)}
+\NormalTok{  )}
+
+\FunctionTok{kable}\NormalTok{(summary\_table,}
+      \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"N"}\NormalTok{, }\StringTok{"MPG Mean"}\NormalTok{, }\StringTok{"MPG SD"}\NormalTok{, }\StringTok{"HP Mean"}\NormalTok{, }\StringTok{"HP SD"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrrrr@{}}
+\toprule\noalign{}
+N & MPG Mean & MPG SD & HP Mean & HP SD \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+32 & 20.1 & 6 & 147 & 69 \\
+\end{longtable}
+
+Not too shabby! Average fuel efficiency is 20.1 MPG with quite a bit of
+variation (SD = 6.0).
+
+\section{Exploring the Data}\label{exploring-the-data}
+
+Let's visualize these patterns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create distribution plots}
+\NormalTok{p1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{bins =} \DecValTok{15}\NormalTok{, }\AttributeTok{fill =}\NormalTok{ custom\_colors[}\DecValTok{1}\NormalTok{], }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Distribution of MPG"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Miles Per Gallon"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Count"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\NormalTok{p2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{factor}\NormalTok{(cyl), }\AttributeTok{y =}\NormalTok{ mpg, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(cyl))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ custom\_colors) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"MPG by Cylinder Count"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Cylinders"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Miles Per Gallon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+
+\CommentTok{\# Combine plots}
+\NormalTok{combined\_plot }\OtherTok{\textless{}{-}}\NormalTok{ p1 }\SpecialCharTok{+}\NormalTok{ p2}
+\FunctionTok{print}\NormalTok{(combined\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/unnamed-chunk-5-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Save the plot}
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"eda{-}overview.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ combined\_plot, }\AttributeTok{width =} \DecValTok{10}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{eda-overview.png}}
+
+}
+
+\caption{Overview of fuel efficiency distributions showing variation
+across cylinder counts}
+
+\end{figure}%
+
+Wow, that's a clear pattern! Cars with fewer cylinders are way more
+fuel-efficient 📊
+
+\subsection{Looking for Relationships}\label{looking-for-relationships}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Find strongest correlations with MPG}
+\NormalTok{correlations }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(mtcars) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rownames\_to\_column}\NormalTok{(}\StringTok{"var1"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{var1, }\AttributeTok{names\_to =} \StringTok{"var2"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"correlation"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(var1 }\SpecialCharTok{==} \StringTok{"mpg"}\NormalTok{, var2 }\SpecialCharTok{!=} \StringTok{"mpg"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(}\FunctionTok{abs}\NormalTok{(correlation)))}
+
+\CommentTok{\# Show top 5}
+\NormalTok{correlations }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{head}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 5 x 3
+  var1  var2  correlation
+  <chr> <chr>       <dbl>
+1 mpg   wt         -0.868
+2 mpg   cyl        -0.852
+3 mpg   disp       -0.848
+4 mpg   hp         -0.776
+5 mpg   drat        0.681
+\end{verbatim}
+
+🔍 Weight has the strongest correlation with MPG (r = -0.87). Let's
+visualize that relationship:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot the relationship}
+\NormalTok{key\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg, }\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ custom\_colors, }\AttributeTok{name =} \StringTok{"Cylinders"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Weight vs Fuel Efficiency"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Weight (1000 lbs)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Miles Per Gallon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(key\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/unnamed-chunk-7-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"correlation{-}plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ key\_plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{correlation-plot.png}}
+
+}
+
+\caption{Scatter plot showing negative relationship between vehicle
+weight and fuel efficiency}
+
+\end{figure}%
+
+Interesting! Heavier cars consistently get worse mileage. Makes sense
+when you think about it 🚗
+
+\section{Building a Model}\label{building-a-model}
+
+Alright, let's build a simple linear model to quantify this
+relationship:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit the model}
+\NormalTok{simple\_model }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ wt, }\AttributeTok{data =}\NormalTok{ mtcars)}
+
+\CommentTok{\# Get tidy summary}
+\NormalTok{model\_summary }\OtherTok{\textless{}{-}} \FunctionTok{tidy}\NormalTok{(simple\_model, }\AttributeTok{conf.int =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{model\_metrics }\OtherTok{\textless{}{-}} \FunctionTok{glance}\NormalTok{(simple\_model)}
+
+\CommentTok{\# Display the results}
+\NormalTok{model\_summary}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 2 x 7
+  term        estimate std.error statistic  p.value conf.low conf.high
+  <chr>          <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+1 (Intercept)    37.3      1.88      19.9  8.24e-19    33.5      41.1 
+2 wt             -5.34     0.559     -9.56 1.29e-10    -6.49     -4.20
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{glance}\NormalTok{(simple\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1 x 12
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      <dbl>         <dbl> <dbl>     <dbl>    <dbl> <dbl>  <dbl> <dbl> <dbl>
+1     0.753         0.745  3.05      91.4 1.29e-10     1  -80.0  166.  170.
+# i 3 more variables: deviance <dbl>, df.residual <int>, nobs <int>
+\end{verbatim}
+
+📊 \textbf{Nice! The model explains 75\% of the variance (R² = 0.75).}
+For every 1,000 lbs of weight, we lose about 5.3 MPG (95\% CI: {[}-6.5,
+-4.1{]}) ✅
+
+Let's make some predictions to see how this works in practice:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predict MPG for different weights}
+\NormalTok{new\_data }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{wt =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{predictions }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(simple\_model, }\AttributeTok{newdata =}\NormalTok{ new\_data, }\AttributeTok{interval =} \StringTok{"confidence"}\NormalTok{)}
+
+\CommentTok{\# Combine for display}
+\FunctionTok{cbind}\NormalTok{(new\_data, predictions)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  wt      fit      lwr      upr
+1  2 26.59618 24.82389 28.36848
+2  3 21.25171 20.12444 22.37899
+3  4 15.90724 14.49018 17.32429
+\end{verbatim}
+
+📝 So a 2,000 lb car gets \textasciitilde30 MPG, while a 4,000 lb car
+only gets \textasciitilde15 MPG. That's quite a difference!
+
+\subsection{Model Visualization}\label{model-visualization}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Visualize model fit with confidence bands}
+\NormalTok{model\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mtcars, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wt, }\AttributeTok{y =}\NormalTok{ mpg)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl)), }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"gray80"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ custom\_colors, }\AttributeTok{name =} \StringTok{"Cylinders"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Linear Model: MPG \textasciitilde{} Weight"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Gray band shows 95\% confidence interval"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Weight (1000 lbs)"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Miles Per Gallon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(model\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/unnamed-chunk-10-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"model{-}plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ model\_plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{model-plot.png}}
+
+}
+
+\caption{Linear regression model showing relationship between weight and
+fuel efficiency with confidence bands}
+
+\end{figure}%
+
+\section{Checking Our Work}\label{checking-our-work}
+
+Before we trust these results, let's check if our model assumptions hold
+up:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add diagnostic information}
+\NormalTok{mtcars\_diagnostics }\OtherTok{\textless{}{-}}\NormalTok{ mtcars }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{predicted =} \FunctionTok{predict}\NormalTok{(simple\_model),}
+    \AttributeTok{residuals =} \FunctionTok{residuals}\NormalTok{(simple\_model),}
+    \AttributeTok{std\_resid =} \FunctionTok{rstandard}\NormalTok{(simple\_model)}
+\NormalTok{  )}
+
+\CommentTok{\# Check for outliers}
+\NormalTok{outliers }\OtherTok{\textless{}{-}} \FunctionTok{which}\NormalTok{(}\FunctionTok{abs}\NormalTok{(mtcars\_diagnostics}\SpecialCharTok{$}\NormalTok{std\_resid) }\SpecialCharTok{\textgreater{}} \FloatTok{2.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+⚠️ \textbf{Diagnostic checks:} Found 0 potential outliers
+(\textgreater2.5 SD). Residual standard error is 3.05 MPG.
+
+Now let's visualize the residuals to check for patterns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create diagnostic plot}
+\NormalTok{diag\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(mtcars\_diagnostics, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ predicted, }\AttributeTok{y =}\NormalTok{ std\_resid)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{factor}\NormalTok{(cyl)), }\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.6}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_hline}\NormalTok{(}\AttributeTok{yintercept =} \FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{2}\NormalTok{),}
+             \AttributeTok{linetype =} \FunctionTok{c}\NormalTok{(}\StringTok{"dashed"}\NormalTok{, }\StringTok{"solid"}\NormalTok{, }\StringTok{"dashed"}\NormalTok{),}
+             \AttributeTok{color =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"black"}\NormalTok{, }\StringTok{"red"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{values =}\NormalTok{ custom\_colors, }\AttributeTok{name =} \StringTok{"Cylinders"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Residual Diagnostics"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Predicted MPG"}\NormalTok{, }\AttributeTok{y =} \StringTok{"Standardized Residuals"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+
+\FunctionTok{print}\NormalTok{(diag\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{index_files/figure-pdf/unnamed-chunk-12-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggsave}\NormalTok{(}\StringTok{"diagnostics{-}plot.png"}\NormalTok{, }\AttributeTok{plot =}\NormalTok{ diag\_plot, }\AttributeTok{width =} \DecValTok{8}\NormalTok{, }\AttributeTok{height =} \DecValTok{5}\NormalTok{, }\AttributeTok{dpi =} \DecValTok{300}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \pandocbounded{\includegraphics[keepaspectratio]{diagnostics-plot.png}}
+
+}
+
+\caption{Diagnostic plot showing residual patterns to assess model
+validity}
+
+\end{figure}%
+
+Looks pretty good! No major patterns in the residuals, though we have a
+couple of potential outliers worth investigating 🔍
+
+\subsection{Things to Watch Out For}\label{things-to-watch-out-for}
+
+A few gotchas I encountered while working on this:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Don't extrapolate too far} - This model works for weights
+  between 1.5-5.5 thousand lbs. Predicting outside that range? Risky!
+\item
+  \textbf{Correlation ≠ Causation} - Weight correlates with MPG, but
+  there are confounding variables (engine size, aerodynamics, etc.)
+\item
+  \textbf{Check your assumptions} - Always plot residuals! A good R²
+  doesn't guarantee your model is appropriate.
+\item
+  \textbf{Small sample size} - We only have 32 cars. Take the confidence
+  intervals seriously!
+\end{enumerate}
+
+\section{What Did We Learn?}\label{what-did-we-learn}
+
+\subsection{Lessons Learnt}\label{lessons-learnt}
+
+Here's what I took away from this exploration:
+
+\textbf{Conceptual Understanding:} - Vehicle weight is a strong
+predictor of fuel efficiency (R² = 0.75) - Each 1,000 lbs reduces MPG by
+\textasciitilde5.3 miles (95\% CI: {[}-6.5, -4.1{]}) - Cylinder count
+effects are partially mediated through weight - Simple models can be
+surprisingly effective with the right predictor
+
+\textbf{Technical Skills:} - Using \texttt{broom::tidy()} for clean
+model output formatting ✅ - Calculating and interpreting confidence
+intervals for predictions - Creating diagnostic plots to validate
+regression assumptions - Combining multiple ggplot visualizations with
+\texttt{patchwork}
+
+\textbf{Gotchas and Pitfalls:} - Always check residual plots - R² alone
+isn't enough! - Extrapolation beyond data range is dangerous - Small
+sample sizes (n=32) require cautious interpretation - Correlation
+doesn't prove causation (confounding variables matter)
+
+\subsection{Limitations}\label{limitations}
+
+This analysis has several limitations to keep in mind:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Old data}: mtcars is from 1974 - modern vehicles (hybrids,
+  EVs) behave differently
+\item
+  \textbf{Small sample}: Only 32 observations limits statistical power
+\item
+  \textbf{Missing variables}: Doesn't account for aerodynamics,
+  transmission type, engine tech
+\item
+  \textbf{Simple model}: Single predictor ignores important confounders
+\item
+  \textbf{Limited scope}: Only passenger cars; may not generalize to
+  trucks/SUVs
+\end{itemize}
+
+\subsection{Opportunities for
+Improvement}\label{opportunities-for-improvement}
+
+If I had more time, here's what I'd explore next:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Multiple regression} - Add cylinder count, horsepower,
+  transmission type
+\item
+  \textbf{Interaction effects} - Does weight impact differ by number of
+  cylinders?
+\item
+  \textbf{Modern data} - Replicate with 2020+ vehicle data to see how
+  relationships changed
+\item
+  \textbf{Non-linear models} - Try polynomial regression or splines for
+  better fit
+\item
+  \textbf{Machine learning comparison} - How does linear regression
+  compare to random forest?
+\item
+  \textbf{Causal inference} - Use techniques to establish causality, not
+  just correlation
+\end{enumerate}
+
+\section{Wrapping Up}\label{wrapping-up}
+
+So that's my journey exploring {[}topic{]}! We saw that vehicle weight
+is a powerful predictor of fuel efficiency, accounting for 75\% of the
+variance. The model is simple but effective, though it has limitations
+worth keeping in mind.
+
+\textbf{Main takeaways:} - Weight strongly predicts MPG (R² = 0.75, β =
+-5.3) - Always check model assumptions with diagnostic plots -
+Confidence intervals matter, especially with small samples - Simple
+models can be surprisingly powerful
+
+I learned a lot working through this, especially about {[}specific
+technical skill you gained{]}. There's definitely room for
+improvement---adding more predictors, trying non-linear models, and
+using modern data would all be interesting extensions.
+
+\textbf{If you're trying this yourself:} - Start with exploration before
+modeling - Plot your residuals! - Don't trust high R² blindly - Report
+confidence intervals alongside point estimates
+
+Thanks for following along! 💙
+
+\section{See Also}\label{see-also}
+
+Related posts and resources:
+
+\begin{itemize}
+\tightlist
+\item
+  {[}Link to related post 1{]}
+\item
+  {[}Link to related post 2{]}
+\item
+  {[}Link to related resource{]}
+\end{itemize}
+
+\textbf{Key Resources:} - \href{https://r4ds.had.co.nz/}{R for Data
+Science} - Free book on tidyverse -
+\href{https://www.statlearning.com/}{Introduction to Statistical
+Learning} - Free textbook with R code -
+\href{https://broom.tidymodels.org/}{broom package docs} - Tidy model
+outputs - \href{https://stats.stackexchange.com/}{Cross Validated} -
+Stats Q\&A community
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Reproducibility}\label{reproducibility}
+
+\textbf{Data:} mtcars (built-in R dataset, \texttt{data(mtcars)})
+\textbf{Code:} All code shown in this post \textbf{Session Info:}
+
+\begin{verbatim}
+R version 4.5.2 (2025-10-31)
+Platform: aarch64-apple-darwin20
+Running under: macOS Sequoia 15.6.1
+
+Matrix products: default
+BLAS:   /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libBLAS.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Los_Angeles
+tzcode source: internal
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] patchwork_1.3.2 knitr_1.50      broom_1.0.10    lubridate_1.9.4
+ [5] forcats_1.0.0   stringr_1.6.0   dplyr_1.1.4     purrr_1.2.0    
+ [9] readr_2.1.5     tidyr_1.3.1     tibble_3.3.0    ggplot2_4.0.1  
+[13] tidyverse_2.0.0
+
+loaded via a namespace (and not attached):
+ [1] utf8_1.2.6         generics_0.1.4     lattice_0.22-7     stringi_1.8.7     
+ [5] hms_1.1.3          digest_0.6.39      magrittr_2.0.4     evaluate_1.0.5    
+ [9] grid_4.5.2         timechange_0.3.0   RColorBrewer_1.1-3 fastmap_1.2.0     
+[13] Matrix_1.7-4       jsonlite_2.0.0     backports_1.5.0    tinytex_0.58      
+[17] mgcv_1.9-3         scales_1.4.0       textshaping_1.0.3  cli_3.6.5         
+[21] rlang_1.1.6        splines_4.5.2      withr_3.0.2        yaml_2.3.11       
+[25] tools_4.5.2        parallel_4.5.2     tzdb_0.5.0         vctrs_0.6.5       
+[29] R6_2.6.1           lifecycle_1.0.4    ragg_1.4.0         pkgconfig_2.0.3   
+[33] pillar_1.11.1      gtable_0.3.6       glue_1.8.0         systemfonts_1.2.3 
+[37] xfun_0.54          tidyselect_1.2.1   farver_2.1.2       htmltools_0.5.9   
+[41] nlme_3.1-168       rmarkdown_2.30     labeling_0.4.3     compiler_4.5.2    
+[45] S7_0.2.1          
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Let's Connect!}\label{lets-connect}
+
+\emph{Have questions, suggestions, or spot an error? Let me know!}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Twitter/X}: \href{https://twitter.com/rgt47}{@rgt47}
+\item
+  \textbf{Mastodon}:
+  \href{https://mastodon.social/@username}{@your\_mastodon}
+\item
+  \textbf{GitHub}: \href{https://github.com/rgt47}{rgt47}
+\item
+  \textbf{Email}: \href{https://rgtlab.org/contact}{Contact form}
+\end{itemize}
+
+\textbf{Please reach out} if you: - Spot errors or have corrections -
+Have suggestions for improvement - Want to discuss the approach - Have
+questions about implementation - Just want to connect! 💙
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+
+
+
+\end{document}
