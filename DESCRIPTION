@@ -12,7 +12,16 @@ RoxygenNote: 7.3.3
 Imports:
     ggplot2,
     patchwork,
-    rlang
+    rlang,
+    broom,
+    here,
+    knitr,
+    palmerpenguins,
+    rmarkdown,
+    testthat,
+    tidyverse,
+    rcmdcheck,
+    renv,
 Suggests:
     renv,
     testthat (>= 3.0.0)
