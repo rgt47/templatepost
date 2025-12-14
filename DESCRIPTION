@@ -20,7 +20,6 @@ Imports:
     rmarkdown,
     testthat,
     tidyverse,
-    rcmdcheck,
     renv,
 Suggests:
     renv,
