@@ -21,7 +21,6 @@ Imports:
     testthat,
     tidyverse,
     renv,
-    rcmdcheck,
 Suggests:
     renv,
     testthat (>= 3.0.0)
