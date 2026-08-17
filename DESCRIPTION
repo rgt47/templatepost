@@ -18,7 +18,6 @@ Imports:
     knitr,
     palmerpenguins,
     rmarkdown,
-    testthat,
     tidyverse,
     renv,
     rcmdcheck,
@@ -126,6 +125,4 @@ Imports:
     xopen,
     yaml,
 Suggests:
-    renv,
-    testthat (>= 3.0.0)
-Config/testthat/edition: 3
+    renv
