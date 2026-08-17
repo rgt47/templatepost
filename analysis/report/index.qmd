@@ -11,10 +11,6 @@ execute:
   echo: true
   warning: false
   message: false
-format:
-  html:
-    code-fold: false
-    code-tools: false
 
 cluster: zzcollab-compendia
 cluster-order: 2
