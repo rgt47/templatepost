@@ -66,6 +66,7 @@ ENV/
 
 # Node.js
 node_modules/
-npm-debug.log**.aux
+npm-debug.log*
+*.aux
 tmp-pdfcrop*.tex
 /index_files/
