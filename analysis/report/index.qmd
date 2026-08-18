@@ -778,6 +778,122 @@ Related posts and resources:
 
 ---
 
+<!-- ============================================================================
+SETUP AND TROUBLESHOOTING SECTION
+============================================================================ -->
+
+# Setup and Troubleshooting
+
+<!-- TEMPLATE INSTRUCTION: SETUP AND TROUBLESHOOTING
+
+Practical reference for readers reproducing your work from scratch, and for
+you when rendering breaks. This section is operational, not narrative, so
+keep it terse and command-focused.
+
+STRUCTURE:
+1. Starting a fresh zzcollab project (if the reader has nothing yet)
+2. Entering the development environment
+3. Common rendering problems and fixes
+4. Validating dependencies before publishing
+
+Adjust the commands below if your post's compendium diverges from the
+zzcollab defaults.
+-->
+
+## Starting a New Project
+
+If you are not already working inside a zzcollab compendium:
+
+```bash
+# Create the project directory
+mkdir my-blog-post && cd my-blog-post
+
+# Initialize the zzcollab project
+zzcollab
+
+# Build the Docker environment
+make docker-build
+```
+
+## Entering the Development Environment
+
+Work inside the Docker container so the analysis stays reproducible:
+
+```bash
+# Enter the container
+make r
+
+# Alternative: start RStudio Server
+make docker-rstudio
+# Open http://localhost:8787 in a browser
+# Username: analyst, Password: analyst
+```
+
+Install any packages needed from inside the container:
+
+```r
+install.packages(c("tidyverse", "broom", "knitr", "patchwork"))
+q()
+```
+
+Packages installed this way are captured automatically in `renv.lock` when
+the R session exits.
+
+## Rendering and Fixing Common Problems
+
+Render the post locally before publishing:
+
+```bash
+quarto render index.qmd --to html
+```
+
+**Problem: code chunk errors**
+
+- Confirm every package referenced in the chunk is installed
+- Confirm the data files the chunk reads actually exist at that path
+- Run chunks individually in the console to isolate the failing line
+
+**Problem: images not displaying**
+
+- Check that image paths are relative to this `.qmd` file
+- Confirm the image file exists at that path
+- Use forward slashes in paths, even on Windows
+
+**Problem: slow rendering**
+
+- Cache expensive chunks with `#| cache: true`
+- Pre-compute results in `analysis/scripts/` and load them here instead of
+  recomputing inline
+- Reduce figure resolution while drafting, then raise it before publishing
+
+## Validating Before Publishing
+
+```bash
+# Exit the container first, then run from the host
+make check-renv
+```
+
+`make check-renv` is a pure-shell check: it scans the R files for package
+usage, confirms each package is listed in `DESCRIPTION`, confirms it is
+locked in `renv.lock`, and pulls in anything missing from CRAN.
+
+Run the test suite next:
+
+```bash
+make docker-test
+```
+
+Once rendering is clean and tests pass, flip `draft: false` in the YAML and
+commit:
+
+```bash
+git add index.qmd media/ renv.lock DESCRIPTION
+git commit -m "Add [topic] blog post"
+git push
+```
+
+---
+
 # Reproducibility
 
 <!-- TEMPLATE INSTRUCTION: REPRODUCIBILITY
