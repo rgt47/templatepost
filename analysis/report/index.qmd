@@ -55,7 +55,8 @@ ANALYSIS DELIVERABLES (produced by analysis/scripts/, loaded — never re-comput
                                                 figures/diagnostics-plot.png
   [ ] R/plotting_utils.R                    — setup_plot_theme(), get_analysis_colors()
   [ ] renv.lock                             — locked package versions
-  [ ] Dockerfile + Makefile                 — `make docker-post-render` reproduces end-to-end
+  [ ] Dockerfile + Makefile                 — `make docker-build && make docker-render-qmd`
+                                              reproduces end-to-end
 
 FIGURES & TABLES (each must include fig-cap and fig-alt)
   [ ] Summary statistics table              — n, means, SDs of key variables
@@ -802,14 +803,17 @@ zzcollab defaults.
 
 ## Starting a New Project
 
-If you are not already working inside a zzcollab compendium:
+If you are not already working inside a zzcollab compendium, scaffold one
+with the `blog` archetype so `zzcollab` wires up `analysis/report/index.qmd`
+plus the `index.qmd`/`data`/`figures`/`media` symlink topology
+automatically:
 
 ```bash
-# Create the project directory
+# Create and enter the post directory
 mkdir my-blog-post && cd my-blog-post
 
-# Initialize the zzcollab project
-zzcollab
+# Initialize with the blog archetype
+zzc init --archetype blog
 
 # Build the Docker environment
 make docker-build
@@ -914,7 +918,7 @@ are pre-generated - this post is just the narrative.
 **Analysis Pipeline:**
 ```bash
 make docker-build
-make docker-post-render
+make docker-render-qmd
 ```
 
 Or step-by-step:
@@ -985,7 +989,7 @@ top of this file. If anything below is unchecked, the post is not ready.
     [ ] grep '\[' index.qmd returns only legitimate code/links
 
 [ ] Analysis pipeline runs end-to-end from clean checkout
-    [ ] make docker-build && make docker-post-render succeeds
+    [ ] make docker-build && make docker-render-qmd succeeds
     [ ] All CSVs and .rds files exist in data/derived_data/
     [ ] All PNGs exist in figures/
 
