@@ -39,7 +39,7 @@ NARRATIVE INPUTS
   [ ] Motivations     — exactly 4 bullets, each personal/specific
   [ ] Objectives      — exactly 4 numbered, measurable goals
   [ ] Conceptual definition of the topic + 1 analogy + 1 concrete example
-  [ ] Lessons Learnt  — 4 conceptual + 4 technical + 4 gotcha bullets
+  [ ] Lessons Learned  — 4 conceptual + 4 technical + 4 gotcha bullets
   [ ] Limitations     — 5 bullets, honest
   [ ] Opportunities for Improvement — 6 numbered future directions
   [ ] Wrapping Up     — 3-paragraph conclusion + "Main takeaways" + "If you're trying this yourself"
@@ -73,7 +73,7 @@ IMAGES (4 total — hero + 3 ambiance, all in media/images/)
   [ ] Hero image (80% width)                — sets tone, appears in blog listing
   [ ] Ambiance image 1 (100% width)         — after Objectives
   [ ] Ambiance image 2 (100% width)         — after first analysis figure
-  [ ] Ambiance image 3 (100% width)         — before Lessons Learnt
+  [ ] Ambiance image 3 (100% width)         — before Lessons Learned
   [ ] media/images/README.md                — sources + attribution for every image
 
 CONTACT & METADATA
@@ -338,7 +338,7 @@ or application].
 
 <!-- TEMPLATE INSTRUCTION: FIRST ANALYSIS SECTION
 
-This is where the real analysis begins!
+This is where the real analysis begins.
 
 STRUCTURE:
 - CODE FIRST (show it)
@@ -386,7 +386,7 @@ considerable variation (SD = 6.0).
 
 <!-- TEMPLATE INSTRUCTION: RESULTS VISUALIZATION SECTION
 
-Here's where your pre-generated figures come in!
+This is where your pre-generated figures come in.
 See analysis/scripts/03_generate_figures.R for how these were created.
 
 PATTERN:
@@ -403,7 +403,7 @@ DON'T: re-create these figures inline (they're already generated!)
 DO: reference the pre-generated files and focus on interpretation
 -->
 
-We visualise these patterns using pre-generated
+We visualize these patterns using pre-generated
 figures from `analysis/scripts/03_generate_figures.R`:
 
 ```{r}
@@ -448,7 +448,7 @@ kable(correlations %>% head(5),
 ```
 
 Weight has the strongest correlation with MPG
-(r = -0.87). We visualise that relationship:
+(r = -0.87). We visualize that relationship:
 
 ```{r}
 #| label: correlation-plot
@@ -661,7 +661,7 @@ THREE CATEGORIES:
 3. Gotchas and Pitfalls (what could go wrong?)
 -->
 
-## Lessons Learnt
+## Lessons Learned
 
 The main takeaways from this exploration:
 
@@ -678,7 +678,7 @@ The main takeaways from this exploration:
 - Combining multiple ggplot visualizations with `patchwork`
 
 **Gotchas and Pitfalls:**
-- Always check residual plots - R² alone isn't enough!
+- Always check residual plots; R² alone is not sufficient.
 - Extrapolation beyond data range is dangerous
 - Small sample sizes (n=32) require cautious interpretation
 - Correlation doesn't prove causation (confounding variables matter)
@@ -749,7 +749,7 @@ technical skill you gained]. Additional extensions
 would all be instructive next steps.
 
 **For those attempting this themselves:**
-- Begin with exploration before modelling.
+- Begin with exploration before modeling.
 - Plot residuals before trusting the fit.
 - High R² alone does not validate a model.
 - Report confidence intervals alongside point
@@ -1003,7 +1003,7 @@ top of this file. If anything below is unchecked, the post is not ready.
     [ ] 1 hero image (width=80%) immediately after AUTHOR PROVIDES block
     [ ] Exactly 3 ambiance images ({.img-fluid} only, no width=NN%,
         no fig-align): after Objectives, after first analysis figure,
-        before Lessons Learnt
+        before Lessons Learned
     [ ] Hero and ambiance captions describe the actual image (not a
         placeholder description)
     [ ] No hand-coded "Download PDF" link in body. The site auto-injects
