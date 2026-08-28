@@ -1,13 +1,36 @@
 # Image Sources
 
-This directory contains static images used in the blog post. Always document the source and license of each image.
+This directory contains static images used in the blog post. Always document
+the source and license of each image.
 
-## penguin-hero.jpg
+## penguin-hero.png
 
 - **Source**: Centralized image storage at `/images/posts/penguin-hero.jpg`
 - **Photographer**: Unknown (from blog assets)
 - **License**: [Check parent repository for attribution]
-- **Usage**: Hero image for blog post listing and opening
+- **Usage**: Hero image (line 151 of `index.qmd`), width 80%
+
+## ambiance1.jpg
+
+- **Source**: Unsplash (white ceramic mug on brown wooden table, overhead
+  shot)
+- **Photographer**: [Attribution needed — confirm before publishing]
+- **License**: [Confirm Unsplash License terms before publishing]
+- **Usage**: Ambiance image 1 (after Objectives), full width
+
+## ambiance2.jpg
+
+- **Source**: Unsplash (notebook, pen, and coffee mug on a countertop)
+- **Photographer**: [Attribution needed — confirm before publishing]
+- **License**: [Confirm Unsplash License terms before publishing]
+- **Usage**: Ambiance image 2 (after first analysis figure), full width
+
+## ambiance3.png
+
+- **Source**: [Attribution needed — confirm before publishing]
+- **Description**: UCSD Geisel Library, exterior view from below
+- **License**: [Confirm before publishing]
+- **Usage**: Ambiance image 3 (before Lessons Learnt), full width
 
 ## Template for Additional Images
 
@@ -35,20 +58,3 @@ When adding images to this post, use this format:
 - Use appropriate open licenses (CC BY, CC BY-SA, etc.)
 - When using freely provided images, maintain attribution
 - Include URLs to original sources when available
-
-## Placeholder coffee images (temporary ambiance slots)
-
-These images are shared placeholders used across all posts until replaced
-with post-specific screenshots or generated images per IMAGE_GENERATION_PLAN.md.
-
-- placeholder-coffee-01.jpg — Photo on Unsplash (ID: wDRR4zu9oMc).
-  White ceramic mug on brown wooden table. Licence: Unsplash Free.
-- placeholder-coffee-02.jpg — Photo on Unsplash (ID: Hy4eZgKCcXI).
-  Black coffee in ceramic mug near pen on open notebook. Licence: Unsplash Free.
-- placeholder-coffee-03.jpg — Photo by Jojo Yuen on Unsplash (ID: dLkBaK_KJbw).
-  Coffee cup, atmospheric. Licence: Unsplash Free.
-- placeholder-coffee-04.jpg — Photo on Unsplash (ID: wiw9kVxFXnU).
-  Clear glass pitcher beside coffee glass, pour-over. Licence: Unsplash Free.
-- placeholder-coffee-05.jpg — Photo on Unsplash (ID: SvnFUJuun78).
-  Coffee being poured into coffee maker, moody. Licence: Unsplash Free.
-

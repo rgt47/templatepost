@@ -248,7 +248,7 @@ EXAMPLES:
 - Topic-related artwork
 ============================================================================ -->
 
-![Atmospheric image to maintain visual engagement - replace with relevant scene](media/images/penguin-hero.png){.img-fluid}
+![Atmospheric image to maintain visual engagement - replace with relevant scene](media/images/ambiance1.jpg){.img-fluid}
 
 <!-- ============================================================================
 PREREQUISITES AND SETUP SECTION
@@ -427,7 +427,7 @@ SIZING: width: 100%, height: auto
 PURPOSE: Mental break, maintain engagement, visual balance
 ============================================================================ -->
 
-![Visual break - another atmospheric image maintaining engagement](media/images/penguin-hero.png){.img-fluid}
+![Visual break - another atmospheric image maintaining engagement](media/images/ambiance2.jpg){.img-fluid}
 
 ## Looking for Relationships
 
@@ -640,7 +640,7 @@ Place before "Lessons Learned" section.
 This creates visual bookends around the main analysis.
 ============================================================================ -->
 
-![Concluding visual - tie back to topic theme](media/images/penguin-hero.png){.img-fluid}
+![Concluding visual - tie back to topic theme](media/images/ambiance3.png){.img-fluid}
 
 # What Did We Learn?
 
