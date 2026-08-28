@@ -45,8 +45,10 @@ clean_data <- raw_data %>%
     # Create categorical engine type
     vs_label = factor(vs, levels = 0:1, labels = c("V-shaped", "Straight")),
     # Create speed category
+    # Upper bound is Inf, not the observed max, so qsec values right at or
+    # above the data's max (22.9) still land in "Slow" instead of NA.
     speed_category = cut(qsec,
-                        breaks = c(0, 16, 18, 22),
+                        breaks = c(0, 16, 18, Inf),
                         labels = c("Fast", "Medium", "Slow"),
                         include.lowest = TRUE)
   ) %>%

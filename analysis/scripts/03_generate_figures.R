@@ -56,7 +56,7 @@ cat("  - Color palette: Primary/Secondary/Tertiary/Quaternary\n\n")
 cat("Generating Figure 1: EDA Overview\n")
 
 p1_dist <- ggplot(mtcars_clean, aes(x = mpg)) +
-  geom_histogram(bins = 15, fill = colors["primary"], alpha = 0.7, color = "white") +
+  geom_histogram(bins = 15, fill = colors[["primary"]], alpha = 0.7, color = "white") +
   labs(
     title = "Distribution of Fuel Efficiency",
     x = "Miles Per Gallon (MPG)",
@@ -70,9 +70,9 @@ p1_dist <- ggplot(mtcars_clean, aes(x = mpg)) +
 p1_box <- ggplot(mtcars_clean, aes(x = cyl_factor, y = mpg, fill = cyl_factor)) +
   geom_boxplot(alpha = 0.7, color = "gray30", size = 0.5) +
   scale_fill_manual(
-    values = c("4-cyl" = colors["primary"],
-               "6-cyl" = colors["secondary"],
-               "8-cyl" = colors["tertiary"]),
+    values = c("4-cyl" = colors[["primary"]],
+               "6-cyl" = colors[["secondary"]],
+               "8-cyl" = colors[["tertiary"]]),
     guide = "none"
   ) +
   labs(
@@ -97,9 +97,9 @@ correlation_plot <- ggplot(mtcars_clean, aes(x = wt, y = mpg, color = cyl_factor
   geom_point(size = 3, alpha = 0.6) +
   geom_smooth(method = "lm", se = FALSE, color = "black", linetype = "dashed", size = 0.8) +
   scale_color_manual(
-    values = c("4-cyl" = colors["primary"],
-               "6-cyl" = colors["secondary"],
-               "8-cyl" = colors["tertiary"]),
+    values = c("4-cyl" = colors[["primary"]],
+               "6-cyl" = colors[["secondary"]],
+               "8-cyl" = colors[["tertiary"]]),
     name = "Cylinders"
   ) +
   labs(
@@ -124,9 +124,9 @@ model_plot <- ggplot(mtcars_clean, aes(x = wt, y = mpg)) +
   geom_point(aes(color = cyl_factor), size = 3, alpha = 0.6) +
   geom_smooth(method = "lm", color = "black", fill = "gray80", alpha = 0.3) +
   scale_color_manual(
-    values = c("4-cyl" = colors["primary"],
-               "6-cyl" = colors["secondary"],
-               "8-cyl" = colors["tertiary"]),
+    values = c("4-cyl" = colors[["primary"]],
+               "6-cyl" = colors[["secondary"]],
+               "8-cyl" = colors[["tertiary"]]),
     name = "Cylinders"
   ) +
   labs(
@@ -160,9 +160,9 @@ diagnostics_plot <- ggplot(diagnostics, aes(x = predicted, y = std_resid)) +
   geom_hline(yintercept = c(-2, 2),
              linetype = "dashed", color = "red", size = 0.5, alpha = 0.7) +
   scale_color_manual(
-    values = c("4-cyl" = colors["primary"],
-               "6-cyl" = colors["secondary"],
-               "8-cyl" = colors["tertiary"]),
+    values = c("4-cyl" = colors[["primary"]],
+               "6-cyl" = colors[["secondary"]],
+               "8-cyl" = colors[["tertiary"]]),
     name = "Cylinders"
   ) +
   labs(
