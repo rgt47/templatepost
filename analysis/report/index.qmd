@@ -6,7 +6,7 @@ categories: [r, zzcollab-compendia, reproducibility]
 description: "I didn't really know much about [topic] until I tried to [implement/understand] it myself. Here's what I learned along the way."
 image: "media/images/penguin-hero.png"
 document-type: "blog"
-draft: true
+draft: false
 execute:
   echo: true
   warning: false
